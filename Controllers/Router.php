@@ -17,7 +17,7 @@ class Router
         $path = parse_url($path, PHP_URL_PATH);
         $path = ltrim($path, '/');
 
-        if ((METHOD !== 'GET' && METHOD !== 'POST') || is_null(ACTION)) {
+        if ((METHOD !== 'GET' && METHOD !== 'POST') || (METHOD === 'POST' && is_null(ACTION))) {
             http_response_code(405);
             return;
         }

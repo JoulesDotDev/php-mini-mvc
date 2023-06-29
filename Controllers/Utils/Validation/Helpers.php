@@ -4,7 +4,7 @@ trait ValidationHelpers
 {
     public function required($value)
     {
-        if ($value === "") {
+        if ($value === "" || $value === null || !isset($value)) {
             return "This field is required";
         }
         return null;

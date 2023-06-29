@@ -1,6 +1,7 @@
 <?php
 
 require_once ROOT_DIR . "/Controllers/Utils/Validation/Validator.php";
+require_once ROOT_DIR . "/Models/UserModel.php";
 
 $values = [
     "email" => $_POST["email"],
@@ -23,6 +24,7 @@ function email()
         $validator->required($v),
         $validator->email($v),
         $validator->maxLen($v, 255),
+        $validator->unique($v, UserModel::getTableName(), "email", "Email already in use")
     ];
 }
 
