@@ -1,11 +1,11 @@
 <?php
 
-require_once "./Routes.php";
+require_once "Routes.php";
 
 class Router
 {
     private $routeMap;
-    private static $routeFile = '/Controllers/Actions/';
+    private static $routesFolder = ROOT_DIR . '/Controllers/Actions/';
 
     public function __construct()
     {
@@ -17,15 +17,15 @@ class Router
         $path = parse_url($path, PHP_URL_PATH);
         $path = ltrim($path, '/');
 
-        if ((METHOD !== 'GET' && METHOD !== 'POST') || (METHOD === 'POST' && is_null(ACTION))) {
-            http_response_code(405);
+        if ((!GET && !POST) || (POST && !ACTION)) {
+            JSON(405, 405);
             return;
         }
 
         if (key_exists($path, $this->routeMap)) {
-            require_once self::$routeFile . $this->routeMap[$path] . ".php";
+            require_once self::$routesFolder . $this->routeMap[$path] . ".php";
         } else {
-            require_once self::$routeFile . "Error404.php";
+            require_once self::$routesFolder . "Error/404.php";
         }
     }
 }

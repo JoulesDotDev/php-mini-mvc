@@ -1,11 +1,7 @@
 <?php
 
-require_once "./Helpers.php";
-
 class Validator
 {
-    use ValidationHelpers;
-
     private $rules;
 
     public function __construct($rules)
@@ -18,11 +14,8 @@ class Validator
         $errors = [];
         foreach ($this->rules as $field_name => $results) {
             foreach ($results as $result) {
-                if ($result !== null) {
-                    $errors[] = [
-                        "field_name" => $field_name,
-                        "error_message" => $result
-                    ];
+                if ($result !== null && !isset($errors[$field_name])) {
+                    $errors[$field_name] = $result;
                 }
             }
         }

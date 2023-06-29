@@ -1,35 +1,39 @@
 <?php
 
-require_once "./Requests/Register.php";
-
-switch (METHOD) {
-    case "GET":
-        show();
-    case "POST":
-        actions();
-}
+if (GET) show();
+else if (POST) actions();
+else JSON(405, 405);
 
 function actions()
 {
-    switch (ACTION) {
-        case "auth:register":
-            echo register();
-        default:
-            http_response_code(405);
-    }
+    if (ACTION === "auth:register") echo register();
+    else JSON(405, 405);
 }
 
 function show()
 {
-    require_once ROOT_DIR . "/Views/Pages/Auth/Register.php";
+    LoadView("Pages/Auth/Register");
 }
 
 function register()
 {
+    require_once "Requests/Register.php";
+
     $result = validate();
     if (count($result["errors"]) > 0) {
-        return json_encode($result);
+        LoadView("Pages/Auth/Register", $result);
+        return;
     }
 
-    return json_encode($result["values"]);
+    try {
+        $user = new UserModel();
+        $user->email = $result["values"]["email"];
+        $user->password = HashPassword($result["values"]["password"]);
+        $user->save();
+
+        redirect("/login");
+    } catch (DBException $e) {
+        // TODO: Log
+        redirect("/500");
+    }
 }

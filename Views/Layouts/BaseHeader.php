@@ -1,17 +1,9 @@
-<?php
+<!DOCTYPE html>
+<html>
 
-function layout()
-{
-?>
-    <!DOCTYPE html>
-    <html>
+<head>
+    <title><?= $title ?></title>
+</head>
 
-    <head>
-        <title>Page Title</title>
-    </head>
-
-    <body>
-        <div class="container">
-
-        <?php
-    }
+<body>
+    <div class="container">

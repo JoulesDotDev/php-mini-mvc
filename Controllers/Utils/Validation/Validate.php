@@ -1,8 +1,10 @@
 <?php
 
-trait ValidationHelpers
+require ROOT_DIR . "/Models/DB.php";
+
+class Validate
 {
-    public function required($value)
+    public static function required($value)
     {
         if ($value === "" || $value === null || !isset($value)) {
             return "This field is required";
@@ -10,7 +12,7 @@ trait ValidationHelpers
         return null;
     }
 
-    public function minLen($value, $min)
+    public static function minLen($value, $min)
     {
         if (strlen($value) < $min) {
             return "This field must be at least $min characters long";
@@ -18,7 +20,7 @@ trait ValidationHelpers
         return null;
     }
 
-    public function maxLen($value, $max)
+    public static function maxLen($value, $max)
     {
         if (strlen($value) > $max) {
             return "This field must be at most $max characters long";
@@ -26,7 +28,7 @@ trait ValidationHelpers
         return null;
     }
 
-    public function email($value)
+    public static function email($value)
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             return "This field must be a valid email address";
@@ -34,7 +36,7 @@ trait ValidationHelpers
         return null;
     }
 
-    public function regex($value, $pattern, $message)
+    public static function regex($value, $pattern, $message)
     {
         if (!preg_match($pattern, $value)) {
             return $message;
@@ -42,7 +44,7 @@ trait ValidationHelpers
         return null;
     }
 
-    public function equals($value, $other_value, $name)
+    public static function equals($value, $other_value, $name)
     {
         if ($value !== $other_value) {
             return "This field must be equal to $name";
@@ -50,12 +52,11 @@ trait ValidationHelpers
         return null;
     }
 
-    public function unique($value, $table, $column, $message)
+    public static function unique($value, $table, $column, $message)
     {
-        $query = $this->db->prepare("SELECT * FROM $table WHERE $column = ?");
-        $query->execute([$value]);
-        $result = $query->fetch();
-        if ($result) {
+        $stmt = DB::query("SELECT * FROM $table WHERE $column = ?", [$value]);
+        $result = $stmt->fetchAll();
+        if (count($result) > 1) {
             return $message;
         }
         return null;

@@ -1,0 +1,9 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_URI} !\.[^/]+$ [NC,OR]
+RewriteCond %{REQUEST_URI} \.php$ [NC]
+
+RewriteRule ^ index.php [L]
