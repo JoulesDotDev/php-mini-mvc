@@ -33,7 +33,7 @@ function validate()
             "errors" => $validator->validate(),
             "values" => $values
         ];
-    } catch (PDOException  $e) {
+    } catch (PDOException  $e) { //TODO: DBException
         // TODO: Logs
         redirect("/500");
     }
