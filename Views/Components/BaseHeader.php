@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title><?= $title ?></title>
+    <title><?= $data["title"] ?></title>
 </head>
 
 <body>

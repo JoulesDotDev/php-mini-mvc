@@ -54,11 +54,15 @@ class Validate
 
     public static function unique($value, $table, $column, $message)
     {
-        $stmt = DB::query("SELECT * FROM $table WHERE $column = ?", [$value]);
-        $result = $stmt->fetchAll();
-        if (count($result) > 1) {
-            return $message;
+        try {
+            $stmt = DB::query("SELECT * FROM $table WHERE $column = ?", [$value]);
+            $result = $stmt->fetchAll();
+            if (count($result) > 1) {
+                return $message;
+            }
+            return null;
+        } catch (PDOException $e) {
+            throw new DBException($e->getMessage(), $e->getCode(), $e);
         }
-        return null;
     }
 }

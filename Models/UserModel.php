@@ -22,4 +22,10 @@ class UserModel extends DatabaseModel
             throw new DBException($e->getMessage(), $e->getCode(), $e);
         }
     }
+
+    public function fill($values)
+    {
+        $this->email = $values["email"];
+        $this->password = $values["password"];
+    }
 }

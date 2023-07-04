@@ -7,6 +7,11 @@ abstract class DatabaseModel
         throw new Exception("Not implemented");
     }
 
+    private function fill($values)
+    {
+        throw new Exception("Not implemented");
+    }
+
     private function save()
     {
         throw new Exception("Not implemented");

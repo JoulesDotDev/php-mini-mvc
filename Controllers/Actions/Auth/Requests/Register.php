@@ -1,40 +1,30 @@
 <?php
 
 require_once ROOT_DIR . "/Controllers/Utils/Validation/Validator.php";
-require_once ROOT_DIR . "/Controllers/Utils/Validation/Validate.php";
 require_once ROOT_DIR . "/Models/UserModel.php";
 
 function validate()
 {
-    $values = [];
-    $values["email"] = $email = _POST("email");
-    $values["password"] = $password = _POST("password");
-    $values["verify_password"] = $verify_password = _POST("verify_password");
+    $v = _POSTValues(["email", "password", "verify_password"]);
 
-    try {
-        $validator = new Validator([
-            "email" => [
-                Validate::required($email),
-                Validate::email($email),
-                Validate::maxLen($email, 255),
-                Validate::unique($email, UserModel::getTableName(), "email", "Email already in use")
-            ],
-            "password" => [
-                Validate::required($password),
-                Validate::minLen($password, 8),
-                Validate::maxLen($password, 255),
-            ],
-            "verify_password" => [
-                Validate::equals($verify_password, $password, "password"),
-            ]
-        ]);
+    $validator = new Validator();
+    $validator->validate($v, "email")
+        ->required()
+        ->email()
+        ->maxLen(255)
+        ->unique(UserModel::getTableName(), "email", "Email already in use")
+        ->done();
+    $validator->validate($v, "password")
+        ->required()
+        ->minLen(8)
+        ->maxLen(255)
+        ->done();
+    $validator->validate($v, "verify_password")
+        ->equals($v["password"], "password")
+        ->done();
 
-        return [
-            "errors" => $validator->validate(),
-            "values" => $values
-        ];
-    } catch (PDOException  $e) {
-        // TODO: Logs
-        redirect("/500");
-    }
+    return [
+        "errors" => $validator->errors,
+        "values" => $v
+    ];
 }

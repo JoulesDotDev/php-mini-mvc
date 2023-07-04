@@ -1,6 +1,6 @@
 <?php
 
-LoadView("Layouts/BaseHeader", ["title" => "Login"]);
+Component("BaseHeader", ["title" => "Login"]);
 
 $values = $data["values"] ?? [];
 $errors = $data["errors"] ?? [];
@@ -30,4 +30,4 @@ $errors = $data["errors"] ?? [];
 
 <?php
 
-LoadView("Layouts/BaseFooter");
+Component("BaseFooter");

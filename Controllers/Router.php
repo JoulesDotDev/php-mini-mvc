@@ -12,9 +12,9 @@ class Router
         $this->routeMap = routes();
     }
 
-    public function route($path)
+    public function route()
     {
-        $path = parse_url($path, PHP_URL_PATH);
+        $path = parse_url(URI, PHP_URL_PATH);
         $path = ltrim($path, '/');
 
         if ((!GET && !POST) || (POST && !ACTION)) {

@@ -5,5 +5,5 @@ else JSON(405, 405);
 
 function show()
 {
-    LoadView("Pages/Home");
+    View("Home");
 }

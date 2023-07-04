@@ -1,6 +1,6 @@
 <?php
 
-LoadView("Layouts/BaseHeader", ["title" => "Home"]);
+Component("BaseHeader", ["title" => "Home"]);
 
 ?>
 
@@ -8,4 +8,4 @@ LoadView("Layouts/BaseHeader", ["title" => "Home"]);
 
 <?php
 
-LoadView("Layouts/BaseFooter");
+Component("BaseFooter");

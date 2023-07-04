@@ -5,7 +5,7 @@ else JSON(405, 405);
 
 function show()
 {
-    LoadView("Pages/Auth/Login");
+    View("Auth/Login");
 }
 
 // TODO: Login Request

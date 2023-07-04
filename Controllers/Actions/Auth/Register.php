@@ -1,39 +1,40 @@
 <?php
 
+Log::Info("Auth/Register.php: executing");
+
 if (GET) show();
 else if (POST) actions();
 else JSON(405, 405);
 
 function actions()
 {
-    if (ACTION === "auth:register") echo register();
+    if (ACTION === "auth:register") register();
     else JSON(405, 405);
 }
 
 function show()
 {
-    LoadView("Pages/Auth/Register");
+    View("Auth/Register");
 }
 
 function register()
 {
     require_once "Requests/Register.php";
 
-    $result = validate();
-    if (count($result["errors"]) > 0) {
-        LoadView("Pages/Auth/Register", $result);
-        return;
-    }
-
     try {
+        $result = validate();
+
+        if (count($result["errors"]) > 0) {
+            return View("Auth/Register", $result);
+        }
+
         $user = new UserModel();
-        $user->email = $result["values"]["email"];
-        $user->password = HashPassword($result["values"]["password"]);
+        $user->fill($result["values"]);
         $user->save();
 
         redirect("/login");
     } catch (DBException $e) {
-        // TODO: Log
+        Log::Error($e->getMessage());
         redirect("/500");
     }
 }

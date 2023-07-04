@@ -1,9 +1,10 @@
 <?php
 
-LoadView("Layouts/BaseHeader", ["title" => "Register"]);
+Component("BaseHeader", ["title" => "Register"]);
 
 $values = $data["values"] ?? [];
 $errors = $data["errors"] ?? [];
+
 ?>
 
 <form action="/register" method="POST">
@@ -12,25 +13,19 @@ $errors = $data["errors"] ?? [];
     <div>
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Email" value="<?= $values["email"] ?? "" ?>">
-        <?php if (isset($errors["email"])) { ?>
-            <p><?= $errors["email"] ?></p>
-        <?php } ?>
+        <?php Component('FormError', $errors["email"] ?? "") ?>
     </div>
 
     <div>
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Password" value="<?= $values["password"] ?? "" ?>">
-        <?php if (isset($errors["password"])) { ?>
-            <p><?= $errors["password"] ?></p>
-        <?php } ?>
+        <?php Component('FormError', $errors["password"] ?? "") ?>
     </div>
 
     <div>
         <label for="verify_password">Verify password</label>
         <input type="password" id="verify_password" name="verify_password" placeholder="Verify password" value="<?= $values["verify_password"] ?? "" ?>">
-        <?php if (isset($errors["verify_password"])) { ?>
-            <p><?= $errors["verify_password"] ?></p>
-        <?php } ?>
+        <?php Component('FormError', $errors["verify_password"] ?? "") ?>
     </div>
 
     <button type="submit">Register</button>
@@ -38,4 +33,4 @@ $errors = $data["errors"] ?? [];
 
 <?php
 
-LoadView("Layouts/BaseFooter");
+Component("BaseFooter");
