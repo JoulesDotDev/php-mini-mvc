@@ -3,6 +3,7 @@
 
 <head>
     <title><?= $data["title"] ?></title>
+    <!-- TODO: Tailwind, Alpine -->
 </head>
 
 <body>
