@@ -5,6 +5,8 @@ class Log
     static $errorLogs = ROOT_DIR . "/Logs/Error";
     static $infoLogs = ROOT_DIR . "/Logs/Info";
 
+    static $hiddenParams = ["password", "verify_password"];
+
     public static function Error($message = "")
     {
         self::Log($message, "error");
@@ -13,6 +15,17 @@ class Log
     public static function Info($message = "")
     {
         self::Log($message, "info");
+    }
+
+    private static function filteredPost()
+    {
+        $filtered = $_POST;
+        foreach (self::$hiddenParams as $param) {
+            if (key_exists($param, $filtered)) {
+                $filtered[$param] = "********";
+            }
+        }
+        return $filtered;
     }
 
     private static function Log($message = "", $type = "info")
@@ -26,7 +39,7 @@ class Log
         $log .= ACTION ? "ACTION: " . ACTION . PHP_EOL : "";
 
         $log .= empty($_POST) ? "" : str_repeat("- ", 25) . PHP_EOL;
-        $log .= empty($_POST) ? "" : "POST: " . json_encode($_POST, JSON_PRETTY_PRINT) . PHP_EOL;
+        $log .= empty($_POST) ? "" : "POST: " . json_encode(self::filteredPost(), JSON_PRETTY_PRINT) . PHP_EOL;
 
         $log .= empty($_GET) ? "" : str_repeat("- ", 25) . PHP_EOL;
         $log .= empty($_GET) ? "" : "GET: " . json_encode($_GET, JSON_PRETTY_PRINT) . PHP_EOL;
