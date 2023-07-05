@@ -10,7 +10,7 @@ class Log
         self::Log($message, "error");
     }
 
-    public static function Info($message)
+    public static function Info($message = "")
     {
         self::Log($message, "info");
     }

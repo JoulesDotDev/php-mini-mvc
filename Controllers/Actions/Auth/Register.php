@@ -1,15 +1,12 @@
 <?php
 
-Log::Info("Auth/Register.php: executing");
-
 if (GET) show();
 else if (POST) actions();
-else JSON(405, 405);
 
 function actions()
 {
     if (ACTION === "auth:register") register();
-    else JSON(405, 405);
+    else JSON(404, 404);
 }
 
 function show()
@@ -28,7 +25,7 @@ function register()
             return View("Auth/Register", $result);
         }
 
-        $user = new UserModel();
+        $user = new User();
         $user->fill($result["values"]);
         $user->save();
 

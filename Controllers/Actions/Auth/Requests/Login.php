@@ -5,23 +5,24 @@ require_once ROOT_DIR . "/Models/User.php";
 
 function validate()
 {
-    $v = _POSTValues(["email", "password", "verify_password"]);
+    $v = _POSTValues(["email", "password"]);
 
     $validator = new Validator();
     $validator->validate($v, "email")
         ->required()
         ->email()
         ->maxLen(255)
-        ->unique(User::table(), "email", "Email already in use")
         ->done();
     $validator->validate($v, "password")
         ->required()
         ->minLen(8)
         ->maxLen(255)
         ->done();
-    $validator->validate($v, "verify_password")
-        ->equals($v["password"], "password")
-        ->done();
+
+    if (count($validator->errors) < 1) {
+        User::login($v["email"], $v["password"]);
+        $validator->errors["credentials"] = "Invalid email or password";
+    }
 
     return [
         "errors" => $validator->errors,

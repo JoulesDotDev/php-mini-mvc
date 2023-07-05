@@ -12,20 +12,18 @@ $errors = $data["errors"] ?? [];
     <div>
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Email" value="<?= $values["email"] ?? "" ?>">
-        <?php if (isset($errors["email"])) { ?>
-            <p><?= $errors["email"] ?></p>
-        <?php } ?>
+        <?php Component('FormError', $errors["email"] ?? "") ?>
     </div>
 
     <div>
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Password" value="<?= $values["password"] ?? "" ?>">
-        <?php if (isset($errors["email"])) { ?>
-            <p><?= $errors["email"] ?></p>
-        <?php } ?>
+        <?php Component('FormError', $errors["password"] ?? "") ?>
     </div>
 
     <button type="submit">Login</button>
+
+    <div><?php Component('FormError', $errors["credentials"] ?? "") ?></div>
 </form>
 
 <?php

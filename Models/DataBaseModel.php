@@ -1,8 +1,10 @@
 <?php
 
+require_once ROOT_DIR . "/Models/DB.php";
+
 abstract class DatabaseModel
 {
-    private static function get_table_name()
+    private static function table()
     {
         throw new Exception("Not implemented");
     }
@@ -17,12 +19,12 @@ abstract class DatabaseModel
         throw new Exception("Not implemented");
     }
 
-    private function get_by_id($id)
+    private function getById($id)
     {
         throw new Exception("Not implemented");
     }
 
-    private function get_all()
+    private function getAll()
     {
         throw new Exception("Not implemented");
     }

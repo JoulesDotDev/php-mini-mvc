@@ -1,10 +1,17 @@
 <?php
 
-function routes()
-{
-    return array(
-        "" => "Home",
-        "register" => "Auth/Register",
-        "login" => "Auth/Login",
-    );
-}
+Routing::globalMiddleware([
+    "Logging"
+]);
+
+Routing::routes([
+    "" => "Home",
+    "register" => "Auth/Register",
+    "login" => "Auth/Login",
+]);
+
+Routing::routes([
+    "profile" => "Profile"
+])->middleware([
+    "Auth"
+]);

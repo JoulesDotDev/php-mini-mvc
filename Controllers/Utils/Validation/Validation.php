@@ -64,18 +64,33 @@ class Validation
         return $this;
     }
 
-    public function unique($table, $column, $message)
+    public function countRows($table, $column)
     {
         try {
             $stmt = DB::query("SELECT * FROM $table WHERE $column = ?", [$this->value]);
             $result = $stmt->fetchAll();
-            if (count($result) > 1) {
-                $this->errors[] = $message;
-            }
-            return $this;
+            return count($result);
         } catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    public function exists($table, $column, $message)
+    {
+        $result = $this->countRows($table, $column);
+        if ($result < 1) {
+            $this->errors[] = $message;
+        }
+        return $this;
+    }
+
+    public function unique($table, $column, $message)
+    {
+        $result = $this->countRows($table, $column);
+        if ($result > 0) {
+            $this->errors[] = $message;
+        }
+        return $this;
     }
 
     public function done()
