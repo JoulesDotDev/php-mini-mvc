@@ -4,10 +4,14 @@ class Cookie
 {
     public static function set($name, $value, $expiry = SESSION_TIMEOUT)
     {
-        if (setcookie($name, $value, time() + $expiry, '/')) {
-            return true;
-        }
-        return false;
+        setcookie(
+            name: $name,
+            value: $value,
+            expires: time() + $expiry,
+            path: '/',
+            secure: PRODUCTION,
+            httpOnly: true
+        );
     }
 
     public static function delete($name)
