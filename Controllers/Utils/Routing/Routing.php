@@ -11,12 +11,6 @@ class Routing
     {
     }
 
-    public static function create()
-    {
-        if (self::$instance == null) self::$instance = new Routing();
-        return self::$instance;
-    }
-
     public static function routes($routes)
     {
         if (self::$instance == null) self::$instance = new Routing();
