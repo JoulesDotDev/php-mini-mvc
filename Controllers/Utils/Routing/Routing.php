@@ -55,7 +55,7 @@ class Routing
     public static function globalMiddleWare($middlewares)
     {
         if (self::$instance == null) self::$instance = new Routing();
-        self::$instance->globalMiddleware = $middlewares;
+        self::$instance->globalMiddleware = array_unique($middlewares);
         return self::$instance;
     }
 
