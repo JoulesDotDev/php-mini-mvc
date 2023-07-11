@@ -4,7 +4,7 @@ class Cookie
 {
     public static function set($name, $value, $expiry = SESSION_TIMEOUT)
     {
-        setcookie(
+        setcookie( // TODO: SameSite Strict cookie
             name: $name,
             value: $value,
             expires: time() + $expiry,
