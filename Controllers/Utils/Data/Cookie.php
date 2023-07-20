@@ -4,13 +4,15 @@ class Cookie
 {
     public static function set($name, $value, $expiry = SESSION_TIMEOUT)
     {
-        setcookie( // TODO: SameSite Strict cookie
+        setcookie(
             name: $name,
             value: $value,
-            expires: time() + $expiry,
-            path: '/',
-            secure: PRODUCTION,
-            httpOnly: true
+            [
+                  "expires" => time() + $expiry,
+                  "secure" => PRODUCTION,
+                  "httponly" => true,
+                  "samesite" => "Lax"
+            ]
         );
     }
 
