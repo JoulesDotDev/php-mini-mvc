@@ -12,6 +12,18 @@ class JwtModel extends DatabaseModel
         return "jwt";
     }
 
+    public static function checkIfBlackListed($jwt)
+    {
+        try {
+            $stmt = DB::query("SELECT * FROM jwt WHERE jwt = ?", [$jwt]);
+            $result = $stmt->fetch();
+            if (!$result) return false;
+            return true;
+        } catch (PDOException $e) {
+            throw new DBException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
     public static function blacklist($jwt)
     {
         try {
@@ -19,7 +31,7 @@ class JwtModel extends DatabaseModel
             if (!$data) return;
             $expires = $data[0]->exp;
 
-            $result = DB::query("INSERT INTO ? (jwt, expires) VALUES (?, ?)", [self::table(), $jwt, $expires]);
+            $result = DB::query("INSERT INTO jwt (jwt, expires) VALUES (?, ?)", [$jwt, $expires]);
             if (!$result) throw new DBException("Failed to blacklist JWT");
         } catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);
@@ -29,7 +41,7 @@ class JwtModel extends DatabaseModel
     public static function delistExpired()
     {
         try {
-            $result = DB::query("DELETE FROM ? WHERE expires < ?", [self::table(), time()]);
+            $result = DB::query("DELETE FROM jwt WHERE expires < ?", [time()]);
             if (!$result) throw new DBException("Failed to delist expired JWTs");
         } catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);

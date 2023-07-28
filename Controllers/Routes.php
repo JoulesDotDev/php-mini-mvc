@@ -6,12 +6,13 @@ Routing::globalMiddleware([
 
 Routing::routes([
     "" => "Home",
-    "register" => "Auth/Register",
-    "login" => "Auth/Login",
+    "logout" => "Auth/Logout",
+    "500" => "Error/500"
 ]);
 
 Routing::routes([
-    "profile" => "Profile"
-])->middleware([
-    "Auth"
-]);
+    "login" => "Auth/Login",
+    "register" => "Auth/Register"
+])->middleware(["NoAuth"]);
+
+Routing::routes(["profile" => "Profile"])->middleware(["Auth"]);

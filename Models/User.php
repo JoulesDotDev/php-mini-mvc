@@ -1,10 +1,11 @@
 <?php
 
 require_once "DatabaseModel.php";
+require_once "Jwt.php";
 
 class User extends DatabaseModel
 {
-    public $id; // Change to use UUID
+    public $id;
     public $email;
     public $password;
 
@@ -16,7 +17,7 @@ class User extends DatabaseModel
     public function save()
     {
         try {
-            $result = DB::query("INSERT INTO ? (email, password) VALUES (?, ?)", [self::table(), $this->email, $this->password]);
+            $result = DB::query("INSERT INTO users (email, password) VALUES (?, ?)", [$this->email, $this->password]);
             if (!$result) throw new DBException("Failed to save user");
         } catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);
@@ -26,13 +27,13 @@ class User extends DatabaseModel
     public function fill($values)
     {
         $this->email = $values["email"];
-        $this->password = $values["password"] ?? null;
+        $this->password = isset($values["password"]) ? HashPassword($values["password"]) : null;
     }
 
     public static function login($email, $password)
     {
         try {
-            $stmt = DB::query("SELECT * FROM ? WHERE email = ?", [self::table(), $email]);
+            $stmt = DB::query("SELECT * FROM users WHERE email = ?", [$email]);
             $result = $stmt->fetch();
             if (!$result) return null;
             if (!VerifyPassword($password, $result["password"])) return null;
@@ -41,6 +42,26 @@ class User extends DatabaseModel
             Cookie::set("token", $jwt);
             redirect("/");
         } catch (PDOException $e) {
+            throw new DBException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    public static function getCurrentUser()
+    {
+        $jwt = Cookie::get("token");
+        $data = JWT::decode($jwt);
+        if (!$data) return null;
+
+        $result = JwtModel::checkIfBlackListed($jwt);
+        if ($result) return null;
+
+        $payload = $data[1];
+
+        try {
+            $user = User::getById($payload->id);
+            if (!$user) return null;
+            return $user;
+        } catch (DBException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -59,7 +80,7 @@ class User extends DatabaseModel
     public static function getById($id)
     {
         try {
-            $stmt = DB::query("SELECT id, email FROM ? WHERE id = ?", [self::table(), $id]);
+            $stmt = DB::query("SELECT id, email FROM users WHERE id = ?", [$id]);
             $result = $stmt->fetch();
             if (!$result) return null;
 

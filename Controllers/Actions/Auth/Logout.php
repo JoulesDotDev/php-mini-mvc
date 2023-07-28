@@ -11,6 +11,8 @@ function actions()
 
 function logout()
 {
+    require_once ROOT_DIR . "/Models/User.php";
+
     try {
         User::logout();
     } catch (DBException $e) {
