@@ -44,7 +44,7 @@ class JWT
             true
         ))) return null;
 
-        return $payload;
+        return [$header, $payload];
     }
 }
 
