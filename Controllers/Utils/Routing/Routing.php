@@ -11,12 +11,6 @@ class Routing
     {
     }
 
-    public static function create()
-    {
-        if (self::$instance == null) self::$instance = new Routing();
-        return self::$instance;
-    }
-
     public static function routes($routes)
     {
         if (self::$instance == null) self::$instance = new Routing();
@@ -61,7 +55,7 @@ class Routing
     public static function globalMiddleWare($middlewares)
     {
         if (self::$instance == null) self::$instance = new Routing();
-        self::$instance->globalMiddleware = $middlewares;
+        self::$instance->globalMiddleware = array_unique($middlewares);
         return self::$instance;
     }
 

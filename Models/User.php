@@ -4,7 +4,7 @@ require_once "DatabaseModel.php";
 
 class User extends DatabaseModel
 {
-    public $id;
+    public $id; // Change to use UUID
     public $email;
     public $password;
 
