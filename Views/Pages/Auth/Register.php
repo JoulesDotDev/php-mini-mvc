@@ -9,7 +9,7 @@ $errors = $data["errors"] ?? [];
 
 <form action="/register" method="POST">
     <?= csrf() ?>
-    <input type="hidden" name="action" value="auth:register">
+    <?= action("auth:register") ?>
 
     <div>
         <label for="email">Email</label>

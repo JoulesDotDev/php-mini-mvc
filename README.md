@@ -1,7 +1,8 @@
 # Simple MVC Structure
 
 ## Writen in pure PHP
-- No dependies
+- No dependencies
+- Vanilla PHP
 - Easy to change if needed
 
 ## Features

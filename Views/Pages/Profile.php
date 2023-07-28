@@ -11,7 +11,8 @@ $email = $data->email ?? "";
 <p>Logout</p>
 <form action="/logout" method="POST">
     <?= csrf() ?>
-    <input type="hidden" name="action" value="auth:logout">
+    <?= action("auth:logout") ?>
+
     <button type="submit">Logout</button>
 </form>
 
