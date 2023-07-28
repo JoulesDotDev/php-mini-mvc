@@ -5,13 +5,13 @@ class Cookie
     public static function set($name, $value, $expiry = SESSION_TIMEOUT)
     {
         setcookie(
-            name: $name,
-            value: $value,
+            $name,
+            $value,
             [
-                  "expires" => time() + $expiry,
-                  "secure" => PRODUCTION,
-                  "httponly" => true,
-                  "samesite" => "Lax"
+                "expires" => time() + $expiry,
+                "secure" => PRODUCTION,
+                "httponly" => true,
+                "samesite" => "Lax"
             ]
         );
     }
