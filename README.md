@@ -7,8 +7,9 @@
 ## Features
 - MVC
 - Validation
-- JWT
+- JWT + Blacklisting
+- CSRF Protection
 - Middleware
-- Easy to load views and components
 - MySQL Connection
 - Logger
+- Easy to load views and components

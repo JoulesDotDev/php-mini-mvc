@@ -1,7 +1,8 @@
 <?php
 
 Routing::globalMiddleware([
-    "Logging"
+    "Logging",
+    "Csrf"
 ]);
 
 Routing::routes([

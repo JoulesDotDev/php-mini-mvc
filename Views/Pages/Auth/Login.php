@@ -7,6 +7,7 @@ $errors = $data["errors"] ?? [];
 ?>
 
 <form action="/login" method="POST">
+    <?= csrf() ?>
     <input type="hidden" name="action" value="auth:login">
 
     <div>
