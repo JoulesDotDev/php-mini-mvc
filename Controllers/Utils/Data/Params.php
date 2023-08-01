@@ -2,12 +2,12 @@
 
 function _GET($key)
 {
-    return isset($_GET[$key]) ? $_GET[$key] : null;
+    return $_GET[$key] ?? null;
 }
 
 function _POST($key)
 {
-    return isset($_POST[$key]) ? $_POST[$key] : null;
+    return $_POST[$key] ?? null;
 }
 
 function _POSTValues($keys)

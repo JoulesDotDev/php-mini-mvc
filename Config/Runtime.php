@@ -6,5 +6,5 @@ if (!CRON) {
     define('POST', $_SERVER['REQUEST_METHOD'] === "POST");
     define('METHOD', $_SERVER['REQUEST_METHOD']);
 
-    define('ACTION', isset($_POST['action']) ? $_POST['action'] : null);
+    define('ACTION', $_POST['action'] ?? null);
 }

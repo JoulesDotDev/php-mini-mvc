@@ -1,8 +1,9 @@
 # Simple MVC Structure
 
 ## Writen in pure PHP
-- No dependencies
 - Vanilla PHP
+- No dependencies
+- Except PHPMailer for email sending
 - Easy to change if needed
 
 ## Features
@@ -17,5 +18,13 @@
 
 ## Roadmap
 - Email + Email Verification
-- Ratelimiting
+- Better 404 Page
+- Better 500 error handling
+- Rate limiting
 - HTMX + AlpineJS + TailwindCSS Branch
+- ORM Branch
+
+
+
+TODO: Verification endpoint and actually verify user
+TODO: Add Name field to user and forms

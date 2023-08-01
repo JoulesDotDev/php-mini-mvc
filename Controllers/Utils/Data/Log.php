@@ -4,17 +4,18 @@ class Log
 {
     static $errorLogs = ROOT_DIR . "/Logs/Error";
     static $infoLogs = ROOT_DIR . "/Logs/Info";
+    static $simpleLogs = ROOT_DIR . "/Logs/Simple";
 
-    static $hiddenParams = ["password", "verify_password"];
+    static $hiddenParams = ["password", "verify_password", "csrf_token"];
 
     public static function Error($message = "")
     {
-        self::Log($message, "error");
+        self::Log(json_encode($message, JSON_PRETTY_PRINT), "error");
     }
 
     public static function Info($message = "")
     {
-        self::Log($message, "info");
+        self::Log(json_encode($message, JSON_PRETTY_PRINT), "info");
     }
 
     private static function filteredPost()
@@ -26,6 +27,18 @@ class Log
             }
         }
         return $filtered;
+    }
+
+    public static function Simple($message = "")
+    {
+        $file = date("Y-m-d") . ".log";
+
+        $log = "[LOG]" . PHP_EOL;
+        $log .= str_repeat("- ", 25) . PHP_EOL;
+        $log .= "Message: " . json_encode($message, JSON_PRETTY_PRINT) . PHP_EOL;
+        $log .= str_repeat("=", 75) . PHP_EOL;
+
+        file_put_contents(self::$simpleLogs . "/$file", $log, FILE_APPEND);
     }
 
     private static function Log($message = "", $type = "info")

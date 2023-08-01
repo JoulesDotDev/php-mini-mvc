@@ -18,7 +18,7 @@ class Validation
 
     public function required()
     {
-        if ($this->value === "" || $this->value === null || !isset($this->value)) {
+        if (!isset($this->value) || $this->value === "" || $this->value === null) {
             $this->errors[] = "This field is required";
         }
         return $this;

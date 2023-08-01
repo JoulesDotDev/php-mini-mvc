@@ -2,24 +2,38 @@
 
 class DB
 {
-    public static function connect()
+    private static $instance = null;
+    private $conn;
+
+    private function __construct()
     {
         $host = DB_HOST;
         $dbname = DB_NAME;
         $user = DB_USER;
         $pass = DB_PASS;
 
-        $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
 
-        return $conn;
+    public static function getInstance()
+    {
+        if (!self::$instance) {
+            self::$instance = new DB();
+        }
+
+        return self::$instance;
     }
 
     public static function query($sql, $params = [])
     {
-        $conn = self::connect();
-        $stmt = $conn->prepare($sql);
+        $stmt = self::getInstance()->conn->prepare($sql);
         $stmt->execute($params);
         return $stmt;
+    }
+
+    public static function lastInsertId()
+    {
+        return self::getInstance()->conn->lastInsertId();
     }
 }

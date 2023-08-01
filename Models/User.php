@@ -7,7 +7,9 @@ class User extends DatabaseModel
 {
     public $id;
     public $email;
+    public $name;
     public $password;
+    public $verified;
 
     public static function table()
     {
@@ -17,8 +19,10 @@ class User extends DatabaseModel
     public function save()
     {
         try {
-            $result = DB::query("INSERT INTO users (email, password) VALUES (?, ?)", [$this->email, $this->password]);
+            $result = DB::query("INSERT INTO " . self::table() . " (email, password) VALUES (?, ?)", [$this->email, $this->password]);
+            $this->password = null;
             if (!$result) throw new DBException("Failed to save user");
+            $this->id = DB::lastInsertId();
         } catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);
         }
@@ -33,7 +37,7 @@ class User extends DatabaseModel
     public static function login($email, $password)
     {
         try {
-            $stmt = DB::query("SELECT * FROM users WHERE email = ?", [$email]);
+            $stmt = DB::query("SELECT * FROM " . self::table() . " WHERE email = ?", [$email]);
             $result = $stmt->fetch();
             if (!$result) return null;
             if (!VerifyPassword($password, $result["password"])) return null;
@@ -80,7 +84,8 @@ class User extends DatabaseModel
     public static function getById($id)
     {
         try {
-            $stmt = DB::query("SELECT id, email FROM users WHERE id = ?", [$id]);
+            // TODO: Generic Base GetById
+            $stmt = DB::query("SELECT id, email FROM " . self::table() . "  WHERE id = ?", [$id]);
             $result = $stmt->fetch();
             if (!$result) return null;
 
