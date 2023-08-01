@@ -16,6 +16,6 @@
 - Easy to load views and components
 
 ## Roadmap
-- Email
+- Email + Email Verification
 - Ratelimiting
 - HTMX + AlpineJS + TailwindCSS Branch
