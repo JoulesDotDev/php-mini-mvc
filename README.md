@@ -14,3 +14,7 @@
 - MySQL Connection
 - Logger
 - Easy to load views and components
+
+## Roadmap
+- Email
+- HTMX + AlpineJS + TailwindCSS Branch
