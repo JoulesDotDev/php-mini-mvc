@@ -18,6 +18,12 @@ $errors = $data["errors"] ?? [];
     </div>
 
     <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Name" value="<?= $values["name"] ?? "" ?>">
+        <?php Component('FormError', $errors["name"] ?? "") ?>
+    </div>
+
+    <div>
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Password" value="<?= $values["password"] ?? "" ?>">
         <?php Component('FormError', $errors["password"] ?? "") ?>

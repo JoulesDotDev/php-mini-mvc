@@ -5,7 +5,7 @@ require_once ROOT_DIR . "/Models/User.php";
 
 function validate()
 {
-    $v = _POSTValues(["email", "password", "verify_password"]);
+    $v = _POSTValues(["email", "name", "password", "verify_password"]);
 
     $validator = new Validator();
     $validator->validate($v, "email")
@@ -13,6 +13,11 @@ function validate()
         ->email()
         ->maxLen(255)
         ->unique(User::table(), "email", "Email already in use")
+        ->done();
+    $validator->validate($v, "name")
+        ->required()
+        ->name()
+        ->maxLen(255)
         ->done();
     $validator->validate($v, "password")
         ->required()

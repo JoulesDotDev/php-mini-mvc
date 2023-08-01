@@ -48,6 +48,14 @@ class Validation
         return $this;
     }
 
+    public function name()
+    {
+        if (!preg_match('/^[\p{L} ]*$/u', $this->value)) {
+            $this->errors[] = "This field must be a valid name";
+        }
+        return $this;
+    }
+
     public function regex($pattern, $message)
     {
         if (!preg_match($pattern, $this->value)) {

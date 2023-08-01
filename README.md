@@ -24,7 +24,5 @@
 - HTMX + AlpineJS + TailwindCSS Branch
 - ORM Branch
 
-
-
 TODO: Verification endpoint and actually verify user
-TODO: Add Name field to user and forms
+TODO: No login if not verified

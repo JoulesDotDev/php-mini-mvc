@@ -31,6 +31,7 @@ class User extends DatabaseModel
     public function fill($values)
     {
         $this->email = $values["email"];
+        $this->name = $values["name"];
         $this->password = isset($values["password"]) ? HashPassword($values["password"]) : null;
     }
 
