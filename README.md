@@ -10,6 +10,8 @@
 - MVC
 - Validation
 - JWT + Blacklisting
+- User profiles
+- Email + Email Verification
 - CSRF Protection
 - Middleware
 - MySQL Connection
@@ -17,7 +19,6 @@
 - Easy to load views and components
 
 ## Roadmap
-- Email + Email Verification
 - Better 404 Page
 - Better 500 error handling
 - Rate limiting
