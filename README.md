@@ -16,6 +16,7 @@
 - Easy to load views and components
 
 ## Roadmap
+- Generic DB Functions, getById, getAll, etc.
 - Email + Email Verification
 - Ratelimiting
 - HTMX + AlpineJS + TailwindCSS Branch
