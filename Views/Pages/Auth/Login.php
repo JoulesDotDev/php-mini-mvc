@@ -13,19 +13,29 @@ $errors = $data["errors"] ?? [];
     <div>
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Email" value="<?= $values["email"] ?? "" ?>">
-        <?php Component('FormError', $errors["email"] ?? "") ?>
+        <?php Component('Form/Error', $errors["email"] ?? "") ?>
     </div>
 
     <div>
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Password" value="<?= $values["password"] ?? "" ?>">
-        <?php Component('FormError', $errors["password"] ?? "") ?>
+        <?php Component('Form/Error', $errors["password"] ?? "") ?>
     </div>
 
     <button type="submit">Login</button>
 
-    <div><?php Component('FormError', $errors["credentials"] ?? "") ?></div>
+    <div><?php Component('Form/Error', $errors["credentials"] ?? "") ?></div>
 </form>
+
+<?php if ($errors["unverified"] ?? null) : ?>
+    <form action="/verify-resend" method="POST">
+        <?= csrf() ?>
+        <?= action("auth:verify-resend") ?>
+        <input type="hidden" name="email" value="<?= $values["email"] ?>">
+        <p>Your email (<?= $values["email"] ?>) is not verified.</p>
+        <button type="submit">Resend verification email</button>
+    </form>
+<?php endif; ?>
 
 <?php
 

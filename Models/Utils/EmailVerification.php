@@ -1,8 +1,8 @@
 <?php
 
-require_once "DatabaseModel.php";
+require_once ROOT_DIR . "/Models/DB.php";
 
-class EmailVerification extends DatabaseModel
+class EmailVerification
 {
     public $user_id;
     public $token;
@@ -17,12 +17,13 @@ class EmailVerification extends DatabaseModel
     {
         try {
             $result = DB::query(
-                "INSERT INTO " . self::table() . " (user_id, token, valid_until) VALUES (?, ?, ?)",
+                "INSERT INTO " . self::table() .
+                    " (user_id, token, valid_until) VALUES (?, ?, ?)",
                 [$this->user_id, $this->token, $this->validUntil]
             );
+
             if (!$result) throw new DBException("Failed to save verification token");
         } catch (PDOException $e) {
-            Log::Error("{$e->getMessage()} ({$e->getCode()})");
             throw new DBException($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -44,7 +45,7 @@ class EmailVerification extends DatabaseModel
             $user->email,
             [
                 "name" => $user->name,
-                "link" => BASE_URL . "/email/verify/?token=" . self::generate($user->id)
+                "link" => BASE_URL . "/verify-email?token=" . self::generate($user->id)
             ]
         );
     }
@@ -54,16 +55,15 @@ class EmailVerification extends DatabaseModel
         try {
             $stmt = DB::query("SELECT * FROM " . self::table() . " WHERE token = ?", [$token]);
             $result = $stmt->fetch();
-            if (!$result) return null;
-            if ($result["valid_until"] < time()) return null;
+            if (!$result) return false;
+            if ($result["valid_until"] < time()) return false;
+            self::deleteByToken($token);
 
             $user = User::getById($result["user_id"]);
             $user->verified = true;
             $user->save();
 
-            self::deleteByToken($token);
-
-            return $user;
+            return true;
         } catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);
         }
@@ -75,7 +75,7 @@ class EmailVerification extends DatabaseModel
             DB::query("DELETE FROM " . self::table() . " WHERE token = ?", [$token]);
         } catch (PDOException $ignored) {
             $exception = new DBException("Couldn't delete token", $ignored->getCode(), $ignored);
-            Log::error("Couldn't delete token", $exception);
+            Log::error($exception);
         }
     }
 
@@ -85,7 +85,7 @@ class EmailVerification extends DatabaseModel
             DB::query("DELETE FROM " . self::table() . " WHERE valid_until < ?", [time()]);
         } catch (PDOException $ignored) {
             $exception = new DBException("Couldn't delete expired tokens", $ignored->getCode(), $ignored);
-            Log::error("Couldn't delete expired tokens", $exception);
+            Log::error($exception);
         }
     }
 }

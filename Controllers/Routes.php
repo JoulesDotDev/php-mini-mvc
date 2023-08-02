@@ -13,7 +13,9 @@ Routing::routes([
 
 Routing::routes([
     "login" => "Auth/Login",
-    "register" => "Auth/Register"
+    "register" => "Auth/Register",
+    "verify-email" => "Auth/VerifyEmail",
+    "verify-resend" => "Auth/VerifyResend"
 ])->middleware(["NoAuth"]);
 
 Routing::routes(["profile" => "Profile"])->middleware(["Auth"]);

@@ -1,7 +1,7 @@
 <?php
 
 require_once ROOT_DIR . "/Controllers/Utils/Validation/Validator.php";
-require_once ROOT_DIR . "/Models/User.php";
+require_once ROOT_DIR . "/Models/User/User.php";
 
 function validate()
 {
@@ -20,8 +20,12 @@ function validate()
         ->done();
 
     if (count($validator->errors) < 1) {
-        User::login($v["email"], $v["password"]);
-        $validator->errors["credentials"] = "Invalid email or password";
+        $valid = User::login($v["email"], $v["password"]);
+        if (!$valid) {
+            $validator->errors["credentials"] = "Invalid email or password";
+        } else {
+            $validator->errors["unverified"] = "unverified";
+        }
     }
 
     return [

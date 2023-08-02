@@ -6,11 +6,11 @@ class Log
     static $infoLogs = ROOT_DIR . "/Logs/Info";
     static $simpleLogs = ROOT_DIR . "/Logs/Simple";
 
-    static $hiddenParams = ["password", "verify_password", "csrf_token"];
+    static $hiddenParams = ["password", "verify_password", "csrf_token", "token"];
 
-    public static function Error($message = "")
+    public static function Error(Exception $e)
     {
-        self::Log(json_encode($message, JSON_PRETTY_PRINT), "error");
+        self::Log(get_class($e) . " " . $e->getMessage(), "error");
     }
 
     public static function Info($message = "")
@@ -33,8 +33,7 @@ class Log
     {
         $file = date("Y-m-d") . ".log";
 
-        $log = "[LOG]" . PHP_EOL;
-        $log .= str_repeat("- ", 25) . PHP_EOL;
+        $log = date("Y-m-d H:i:s") . " [LOG] " . PHP_EOL;
         $log .= "Message: " . json_encode($message, JSON_PRETTY_PRINT) . PHP_EOL;
         $log .= str_repeat("=", 75) . PHP_EOL;
 

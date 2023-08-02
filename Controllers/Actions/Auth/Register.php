@@ -17,7 +17,7 @@ function show()
 function register()
 {
     require_once "Requests/Register.php";
-    require_once ROOT_DIR . "/Models/EmailVerification.php";
+    require_once ROOT_DIR . "/Models/Utils/EmailVerification.php";
 
     try {
         $result = validate();
@@ -27,16 +27,14 @@ function register()
         }
 
         $user = new User();
+        $result["values"]["password"] = HashPassword($result["values"]["password"]);
         $user->fill($result["values"]);
         $user->save();
         EmailVerification::send($user);
 
-        redirect("/login");
-    } catch (DBException $e) {
-        Log::Error($e->getMessage());
-        redirect("/500");
-    } catch (EmailException $e) {
-        Log::Error($e->getMessage());
+        //return View("Auth/Register", ["success" => true]);
+    } catch (DBException | EmailException $e) {
+        Log::Error($e);
         redirect("/500");
     }
 }

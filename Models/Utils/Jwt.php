@@ -1,8 +1,8 @@
 <?php
 
-require_once "DatabaseModel.php";
+require_once ROOT_DIR . "/Models/DB.php";
 
-class JwtModel extends DatabaseModel
+class JwtModel
 {
     public $jwt;
     public $expires;

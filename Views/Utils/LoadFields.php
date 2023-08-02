@@ -2,10 +2,10 @@
 
 function csrf()
 {
-    Component("Fields/CsrfToken");
+    Component("Form/CsrfToken");
 }
 
 function action($action)
 {
-    Component("Fields/Action", $action);
+    Component("Form/Action", $action);
 }

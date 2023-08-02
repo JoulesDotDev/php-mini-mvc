@@ -1,12 +1,10 @@
 <?php
 
 Component("BaseHeader", ["title" => "Home"]);
-
-$email = $data->email ?? "";
 ?>
 
-<h1>Your Email is</h1>
-<h2><?= $email ?></h2>
+<h1>Hey <?= $data["name"] ?>, Your Email is</h1>
+<h2><?= $data["email"] ?></h2>
 
 <p>Logout</p>
 <form action="/logout" method="POST">

@@ -25,7 +25,7 @@ function login()
             return View("Auth/Login", $result);
         }
     } catch (DBException $e) {
-        Log::Error($e->getMessage());
+        Log::Error($e);
         redirect("/500");
     }
 }

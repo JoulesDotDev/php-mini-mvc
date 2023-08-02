@@ -11,12 +11,12 @@ function actions()
 
 function logout()
 {
-    require_once ROOT_DIR . "/Models/User.php";
+    require_once ROOT_DIR . "/Models/User/User.php";
 
     try {
         User::logout();
     } catch (DBException $e) {
-        Log::Error($e->getMessage());
+        Log::Error($e);
         redirect("/500");
     }
 }

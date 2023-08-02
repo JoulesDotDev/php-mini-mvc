@@ -1,7 +1,7 @@
 <?php
 
 require_once ROOT_DIR . "/Controllers/Utils/Validation/Validator.php";
-require_once ROOT_DIR . "/Models/User.php";
+require_once ROOT_DIR . "/Models/User/User.php";
 
 function validate()
 {

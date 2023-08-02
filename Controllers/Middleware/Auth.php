@@ -1,7 +1,7 @@
 <?php
 
-require_once ROOT_DIR . "/Models/User.php";
-require_once ROOT_DIR . "/Models/Jwt.php";
+require_once ROOT_DIR . "/Models/User/User.php";
+require_once ROOT_DIR . "/Models/Utils/Jwt.php";
 
 try {
     $user = User::getCurrentUser();

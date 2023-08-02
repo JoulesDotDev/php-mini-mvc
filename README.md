@@ -23,6 +23,3 @@
 - Rate limiting
 - HTMX + AlpineJS + TailwindCSS Branch
 - ORM Branch
-
-TODO: Verification endpoint and actually verify user
-TODO: No login if not verified
