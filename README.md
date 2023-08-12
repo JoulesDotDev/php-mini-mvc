@@ -49,7 +49,8 @@
 - Utils Foler
     - Data
         - Utils related to reading and writing data
-        - Helpers for JWT, Cookie and Flash
+        - Helpers for JWT and Cookies
+        - Flash for transfering data between pages/requests
         - Logger
         - Reading of GET and POST Params
         - A _CONTEXT object to move data from Middleware to Controllers to Views
