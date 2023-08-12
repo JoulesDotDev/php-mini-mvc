@@ -1,10 +1,9 @@
 <?php
-
-Component("BaseHeader", ["title" => "Home"]);
+$user = _CONTEXT("user");
 ?>
 
-<h1>Hey <?= $data["name"] ?>, Your Email is</h1>
-<h2><?= $data["email"] ?></h2>
+<h1>Hey <?= $user["name"] ?>, Your Email is</h1>
+<h2><?= $user["email"] ?></h2>
 
 <p>Logout</p>
 <form action="/logout" method="POST">
@@ -13,7 +12,3 @@ Component("BaseHeader", ["title" => "Home"]);
 
     <button type="submit">Logout</button>
 </form>
-
-<?php
-
-Component("BaseFooter");

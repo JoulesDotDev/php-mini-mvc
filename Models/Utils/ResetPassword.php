@@ -2,7 +2,7 @@
 
 require_once ROOT_DIR . "/Models/DB.php";
 
-class EmailVerification
+class ResetPassword
 {
     public $user_id;
     public $token;
@@ -10,7 +10,7 @@ class EmailVerification
 
     public static function table()
     {
-        return "email_verification";
+        return "reset_password";
     }
 
     public function save()
@@ -31,21 +31,21 @@ class EmailVerification
     public static function generate($id)
     {
         $token = bin2hex(random_bytes(64));
-        $verification = new EmailVerification();
+        $verification = new ResetPassword();
         $verification->user_id = $id;
         $verification->token = $token;
-        $verification->validUntil = time() + EMAIL_VERIFICATION_TIMEOUT;
+        $verification->validUntil = time() + PASSSWORD_RESET_TIMEOUT;
         $verification->save();
         return $token;
     }
 
     public static function send($user)
     {
-        Email::verification(
+        Email::resetPassword(
             $user->email,
             [
                 "name" => $user->name,
-                "link" => BASE_URL . "/verify-email?token=" . self::generate($user->id)
+                "link" => BASE_URL . "/reset-password?token=" . self::generate($user->id)
             ]
         );
     }
@@ -55,16 +55,12 @@ class EmailVerification
         try {
             $stmt = DB::query("SELECT * FROM " . self::table() . " WHERE token = ?", [$token]);
             $result = $stmt->fetch();
-            if (!$result) return false;
-            if ($result["valid_until"] < time()) return false;
+            if (!$result) return null;
+            if ($result["valid_until"] < time()) return null;
             self::deleteByToken($token);
 
             $user = User::getById($result["user_id"]);
-            if (!$user) return false;
-            $user->verified = true;
-            $user->save();
-
-            return true;
+            return $user;
         } catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);
         }

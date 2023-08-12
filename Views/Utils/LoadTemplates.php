@@ -2,20 +2,29 @@
 
 function Component($path, $data = null)
 {
-    require ROOT_DIR . "/Views/Components/$path.php";
+    $page = _CONTEXT("_page");
+    $component = ROOT_DIR . "/Views/Pages/$page/Components/$path.php";
+
+    if (!is_file($component)) {
+        $component = ROOT_DIR . "/Views/Components/$path.php";
+    }
+
+    require $component;
 }
 
-function ComponentOnce($path, $data = null)
+function View($path = null)
 {
-    require_once ROOT_DIR . "/Views/Components/$path.php";
-}
+    if (!$path) $path = _CONTEXT("_controller");
+    _CONTEXT_SET("_page", $path);
 
-function View($path, $data = null)
-{
-    require_once ROOT_DIR . "/Views/Pages/$path.php";
-}
+    $page = ROOT_DIR . "/Views/Pages/$path";
+    if (is_dir($page)) {
+        $page .= "/index.php";
+    } else {
+        $page .= ".php";
+    }
 
-function Layout($path, $data = null)
-{
-    require_once ROOT_DIR . "/Views/Layouts/$path.php";
+    require_once ROOT_DIR . "/Views/Components/BaseHeader.php";
+    require_once $page;
+    require_once ROOT_DIR . "/Views/Components/BaseFooter.php";
 }

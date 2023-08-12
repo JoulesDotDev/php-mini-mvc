@@ -2,10 +2,10 @@
 
 function csrf()
 {
-    Component("Form/CsrfToken");
+    Component("FormShared/CsrfToken");
 }
 
 function action($action)
 {
-    Component("Form/Action", $action);
+    Component("FormShared/Action", $action);
 }

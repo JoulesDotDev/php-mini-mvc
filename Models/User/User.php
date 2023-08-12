@@ -2,7 +2,7 @@
 
 require_once ROOT_DIR . "/Models/DB.php";
 require_once ROOT_DIR . "/Models/Utils/Jwt.php";
-require_once ROOT_DIR . "/Models/Utils/FilterTrait.php";
+require_once ROOT_DIR . "/Models/Traits/Filter.php";
 
 require_once "Auth.php";
 require_once "Read.php";

@@ -42,9 +42,17 @@ class Validation
 
     public function email()
     {
+        return $this->required()
+            ->emailPattern()
+            ->maxLen(255);
+    }
+
+    public function emailPattern()
+    {
         if (!filter_var($this->value, FILTER_VALIDATE_EMAIL)) {
             $this->errors[] = "This field must be a valid email address";
         }
+
         return $this;
     }
 
@@ -99,6 +107,13 @@ class Validation
             $this->errors[] = $message;
         }
         return $this;
+    }
+
+    public function password()
+    {
+        return $this->required()
+            ->minLen(8)
+            ->maxLen(255);
     }
 
     public function done()

@@ -30,12 +30,19 @@ class Router
         }
 
         if (key_exists($path, $this->routeMap)) {
-            _CONTEXT_SET("Controller", $this->routeMap[$path]["controller"] . ".php");
+            $controller = $this->routeMap[$path]["controller"];
+            _CONTEXT_SET("_controller", $controller);
+
+            if (is_dir(self::$routesFolder . $controller)) {
+                $controller .= "/index.php";
+            } else {
+                $controller .= ".php";
+            }
 
             foreach ($this->routeMap[$path]["middlewares"] as $middleware) {
                 require_once self::$middlewaresFolder . $middleware . ".php";
             }
-            require_once self::$routesFolder . $this->routeMap[$path]["controller"] . ".php";
+            require_once self::$routesFolder . $controller;
         } else {
             require_once self::$routesFolder . "Error/404.php";
         }

@@ -1,7 +1,9 @@
 <?php
 
+_CONTEXT_SET("page", ["title" => "Email Verification"]);
+
 if (GET) show();
-else if (POST) actions();
+else JSON(405, 405);
 
 function show()
 {
@@ -13,8 +15,9 @@ function show()
         if ($token) {
             $valid = EmailVerification::verify($token);
         }
-        $data = ["valid" => $valid];
-        View("Auth/VerifyEmail", $data);
+
+        _CONTEXT_SET("valid", $valid);
+        View();
     } catch (DBException $e) {
         Log::Error($e);
         redirect("/500");

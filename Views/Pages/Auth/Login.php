@@ -1,9 +1,6 @@
 <?php
-
-Component("BaseHeader", ["title" => "Login"]);
-
-$values = $data["values"] ?? [];
-$errors = $data["errors"] ?? [];
+$values = _CONTEXT("result", "values") ?? [];
+$errors = _CONTEXT("result", "errors") ?? [];
 ?>
 
 <form action="/login" method="POST">
@@ -13,18 +10,22 @@ $errors = $data["errors"] ?? [];
     <div>
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Email" value="<?= $values["email"] ?? "" ?>">
-        <?php Component('Form/Error', $errors["email"] ?? "") ?>
+        <?php Component('FormShared/Error', $errors["email"] ?? "") ?>
     </div>
 
     <div>
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Password" value="<?= $values["password"] ?? "" ?>">
-        <?php Component('Form/Error', $errors["password"] ?? "") ?>
+        <?php Component('FormShared/Error', $errors["password"] ?? "") ?>
     </div>
 
     <button type="submit">Login</button>
 
-    <div><?php Component('Form/Error', $errors["credentials"] ?? "") ?></div>
+    <div><?php Component('FormShared/Error', $errors["credentials"] ?? "") ?></div>
+
+    <div>
+        <a href="/reset-password">Forgot password?</a>
+    </div>
 </form>
 
 <?php if ($errors["unverified"] ?? null) : ?>
@@ -36,7 +37,3 @@ $errors = $data["errors"] ?? [];
         <button type="submit">Resend verification email</button>
     </form>
 <?php endif; ?>
-
-<?php
-
-Component("BaseFooter");

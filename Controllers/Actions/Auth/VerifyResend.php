@@ -1,5 +1,7 @@
 <?php
 
+_CONTEXT_SET("page", ["title" => "Email Verification"]);
+
 if (POST) actions();
 else JSON(405, 405);
 
@@ -18,8 +20,9 @@ function resend()
     try {
         $user = User::getByEmail($email);
         EmailVerification::send($user);
-        $data = ["resent" => true];
-        View("Auth/VerifyEmail", $data);
+
+        _CONTEXT_SET("resend", true);
+        View();
     } catch (DBException | EmailException $e) {
         Log::Error($e);
         redirect("/500");

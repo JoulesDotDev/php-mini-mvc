@@ -1,5 +1,7 @@
 <?php
 
+_CONTEXT_SET("page", ["title" => "Register"]);
+
 if (GET) show();
 else if (POST) actions();
 
@@ -11,19 +13,20 @@ function actions()
 
 function show()
 {
-    View("Auth/Register");
+    View();
 }
 
 function register()
 {
-    require_once "Requests/Register.php";
+    require_once "Request.php";
     require_once ROOT_DIR . "/Models/Utils/EmailVerification.php";
 
     try {
         $result = validate();
 
         if (count($result["errors"]) > 0) {
-            return View("Auth/Register", $result);
+            _CONTEXT_SET("results", $result);
+            return View();
         }
 
         $user = new User();
@@ -32,7 +35,10 @@ function register()
         $user->save();
         EmailVerification::send($user);
 
-        //return View("Auth/Register", ["success" => true]);
+        _CONTEXT_SET("registered", true);
+        _CONTEXT_SET("email", $user->email);
+
+        return View();
     } catch (DBException | EmailException $e) {
         Log::Error($e);
         redirect("/500");
