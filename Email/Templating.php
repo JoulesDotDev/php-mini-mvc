@@ -20,8 +20,6 @@ class Template
 
         foreach ($data as $key => $value) {
             $content = str_replace('{{' . $key . '}}', $value, $content);
-            Log::Simple("Replacing {{{$key}}} with {$value}");
-            Log::Simple($content);
         }
 
         return $content;

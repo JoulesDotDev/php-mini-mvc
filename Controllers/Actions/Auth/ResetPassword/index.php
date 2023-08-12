@@ -2,7 +2,6 @@
 
 _CONTEXT_SET("page", ["title" => "Reset Password"]);
 if (_GET("token")) {
-    _CONTEXT_SET("token", _GET("token"));
     _CONTEXT_SET("reset", true);
 }
 

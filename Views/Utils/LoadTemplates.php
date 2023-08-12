@@ -5,7 +5,8 @@ function Component($path, $data = null)
     $page = _CONTEXT("_page");
     $component = ROOT_DIR . "/Views/Pages/$page/Components/$path.php";
 
-    if (!is_file($component)) {
+    if (!is_file($component) || $path[0] === "/") {
+        if ($path[0] === "/") $path = substr($path, 1);
         $component = ROOT_DIR . "/Views/Components/$path.php";
     }
 

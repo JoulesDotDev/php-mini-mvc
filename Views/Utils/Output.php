@@ -1,6 +1,6 @@
 <?php
 
-function html($text)
+function __($text)
 {
-    return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+    return htmlentities($text, ENT_QUOTES, 'UTF-8');
 }

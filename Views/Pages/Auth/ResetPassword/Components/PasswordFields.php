@@ -5,8 +5,6 @@ $errors = _CONTEXT("result", "errors") ?? [];
 
 <?= action("auth:reset-submit") ?>
 
-<input type="hidden" name="token" value="<?= _CONTEXT("token") ?>">
-
 <div>
     <label for="password">New Password</label>
     <input type="password" id="password" name="password" placeholder="Password" value="<?= $values["password"] ?? "" ?>">
