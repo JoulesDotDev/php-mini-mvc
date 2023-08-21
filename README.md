@@ -21,7 +21,7 @@
 
 ## Roadmap
 - Rate limiting (optional)
-- HTMX + AlpineJS + TailwindCSS Branch
+- HTMX + AlpineJS + TailwindCSS (+daisyui) Branch
 - ORM Branch
 
 # Docs
