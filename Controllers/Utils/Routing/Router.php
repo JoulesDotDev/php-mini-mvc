@@ -32,6 +32,7 @@ class Router
         if (key_exists($path, $this->routeMap)) {
             $controller = $this->routeMap[$path]["controller"];
             _CONTEXT_SET("_controller", $controller);
+            _CONTEXT_SET("_page", $controller);
 
             if (is_dir(self::$routesFolder . $controller)) {
                 $controller .= "/index.php";

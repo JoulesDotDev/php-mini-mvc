@@ -1,8 +1,8 @@
 <?php
 
-function Component($path, $data = null)
+function Component($path, $data = null, $page = null)
 {
-    $page = _CONTEXT("_page");
+    if (!$page) $page = _CONTEXT("_page");
     $component = ROOT_DIR . "/Views/Pages/$page/Components/$path.php";
 
     if (!is_file($component) || $path[0] === "/") {
@@ -15,8 +15,7 @@ function Component($path, $data = null)
 
 function View($path = null)
 {
-    if (!$path) $path = _CONTEXT("_controller");
-    _CONTEXT_SET("_page", $path);
+    if (!$path) $path = _CONTEXT("_page");
 
     $page = ROOT_DIR . "/Views/Pages/$path";
     if (is_dir($page)) {

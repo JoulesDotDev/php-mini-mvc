@@ -2,5 +2,9 @@
 $email = _CONTEXT("email");
 ?>
 
-<h1>Change request successful</h1>
-<p>We sent an email to <b><?= __($email) ?></b> for you to change your password.</p>
+<div class="flex items-center justify-center h-screen">
+    <div class="card bg-primary card-compact w-120 bg-base-100 shadow-xl p-8">
+        <h1 class="text-2xl font-bold">Change request successful</h1>
+        <p class="mt-4">We sent an email to <b><?= __($email) ?></b> for you to change your password.</p>
+    </div>
+</div>

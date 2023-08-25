@@ -14,7 +14,7 @@ trait UserAuth
 
             $jwt = JWT::encode(["id" => $result["id"]]);
             Cookie::set("token", $jwt);
-            redirect("/");
+            hxRedirect("/");
         } catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);
         }

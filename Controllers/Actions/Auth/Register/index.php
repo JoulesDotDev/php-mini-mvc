@@ -25,7 +25,7 @@ function register()
         $result = validate();
 
         if (count($result["errors"]) > 0) {
-            _CONTEXT_SET("results", $result);
+            _CONTEXT_SET("result", $result);
             return View();
         }
 
