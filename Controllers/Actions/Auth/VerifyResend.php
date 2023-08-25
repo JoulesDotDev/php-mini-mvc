@@ -22,7 +22,7 @@ function resend()
         EmailVerification::send($user);
 
         _CONTEXT_SET("resend", true);
-        View();
+        View("Auth/VerifyEmail");
     } catch (DBException | EmailException $e) {
         Log::Error($e);
         redirect("/500");
