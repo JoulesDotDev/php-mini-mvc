@@ -1,3 +1,13 @@
+# About this branch 
+### (Work in progress)
+This will be a full demo app for the MVC structure using:
+- It's mainly about HTMX
+- AlpineJS where needed
+- TailwindsCSS
+- DaisyUI Componets
+
+All changes will be added to the docs after it's compeleted
+
 # Simple MVC Structure
 
 ## Writen in pure PHP
@@ -18,11 +28,6 @@
 - MySQL Connection
 - Logger
 - Easy to load views and components
-
-## Roadmap
-- Rate limiting (optional)
-- HTMX + AlpineJS + TailwindCSS (+daisyui) Branch
-- ORM Branch
 
 # Docs
 
