@@ -48,6 +48,6 @@ trait UserAuth
             JwtModel::blacklist($jwt);
             Cookie::delete("token");
         }
-        redirect("/login");
+        hxRedirect("/login");
     }
 }

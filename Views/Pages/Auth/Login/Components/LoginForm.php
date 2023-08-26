@@ -5,11 +5,11 @@ $unverified = $errors["unverified"] ?? false;
 ?>
 
 <?php if ($unverified) : ?>
-    <form action="/verify-resend" method="POST">
+    <form hx-post="/verify-resend" hx-target="body" hx-push-url="true" method="POST">
         <?= csrf() ?>
         <?= action("auth:verify-resend") ?>
         <input type="hidden" name="email" value="<?= $values["email"] ?>">
-        <p>Your email has not been verified.</p>
+        <p>Your email has not been verified yet.</p>
         <button class="btn btn-active btn-error btn-sm mt-4" type="submit">Resend verification email</button>
     </form>
 <?php endif; ?>

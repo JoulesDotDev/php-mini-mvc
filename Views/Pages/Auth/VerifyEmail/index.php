@@ -8,4 +8,4 @@ if (_CONTEXT("resend")) {
     $component = _CONTEXT("valid") ? "Valid" : "Invalid";
 }
 
-Component($component);
+Component($component, null, "Auth/VerifyEmail");
