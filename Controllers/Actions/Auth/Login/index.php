@@ -35,7 +35,7 @@ function login()
         }
 
         _CONTEXT_SET("result", $result);
-        return Component("LoginForm");
+        return View();
     } catch (DBException $e) {
         Log::Error($e);
         redirect("/500");

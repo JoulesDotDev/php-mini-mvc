@@ -5,7 +5,7 @@ $unverified = $errors["unverified"] ?? false;
 ?>
 
 <?php if ($unverified) : ?>
-    <form hx-post="/verify-resend" hx-target="body" hx-push-url="true" method="POST">
+    <form action="/verify-resend" method="POST">
         <?= csrf() ?>
         <?= action("auth:verify-resend") ?>
         <input type="hidden" name="email" value="<?= $values["email"] ?>">
@@ -14,7 +14,7 @@ $unverified = $errors["unverified"] ?? false;
     </form>
 <?php endif; ?>
 
-<form hx-post="/login" hx-target="#login-form" class="<?= $unverified ? "mt-8" : "" ?>">
+<form action="/login" method="POST" class="<?= $unverified ? "mt-8" : "" ?>">
     <?= csrf() ?>
     <?= action("auth:login") ?>
 
