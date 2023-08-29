@@ -1,12 +1,15 @@
 <?php
 
+require_once ROOT_DIR . "/Models/Traits/Read.php";
+
 trait UserRead
 {
+    use ModelRead;
+
     public static function getById($id, $secretMode = false)
     {
         try {
-            $stmt = DB::query("SELECT * FROM " . self::table() . "  WHERE id = ?", [$id]);
-            $result = $stmt->fetch();
+            $result = self::_getById($id);
             if (!$result) return null;
 
             $user = new User();
