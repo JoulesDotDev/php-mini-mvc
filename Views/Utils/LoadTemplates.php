@@ -16,7 +16,8 @@ function Component($path, $data = null, $page = null)
 
 function View($path = null)
 {
-    if (!$path) $path = _CONTEXT("_page");
+    if (!$path) $path = _CONTEXT("_controller");
+    _CONTEXT_SET("_page", $path);
 
     $page = ROOT_DIR . "/Views/Pages/$path";
     if (is_dir($page)) {
