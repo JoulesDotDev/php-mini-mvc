@@ -18,6 +18,7 @@ class User
     public $name;
     public $password;
     public $verified;
+    public $admin;
 
     public static function table()
     {
@@ -35,7 +36,8 @@ class User
         $this->email = $values["email"];
         $this->name = $values["name"];
         $this->password = $values["password"];
-        $this->verified = $values["verified"] ?? false;
+        $this->verified = $values["verified"];
+        $this->admin = $values["admin"];
     }
 
     public function save()
