@@ -1,1 +1,4 @@
-<h1>500</h1>
+<?php
+
+_CONTEXT_SET("page", ["title" => "Terrible Error"]);
+View();

@@ -26,7 +26,7 @@ function View($path = null)
         $page .= ".php";
     }
 
-    require_once ROOT_DIR . "/Views/Components/BaseHeader.php";
+    Component("/Layout/BaseHeader");
     require_once $page;
-    require_once ROOT_DIR . "/Views/Components/BaseFooter.php";
+    Component("/Layout/BaseFooter");
 }

@@ -19,7 +19,7 @@ class BooksUsers
         $this->id = $values["id"] ?? null;
         $this->user_id = $values["user_id"];
         $this->number = $values["number"];
-        $this->paid_at = $values["paid_at"];
+        $this->paid_at = $values["paid_at"] ?? time();
     }
 
     public function save()

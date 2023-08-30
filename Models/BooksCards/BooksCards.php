@@ -19,8 +19,8 @@ class BooksCards
     {
         $this->book_id = $values["book_id"];
         $this->card_id = $values["card_id"];
-        $this->borrowed_at = $values["borrowed_at"];
-        $this->returned_at = $values["returned_at"];
+        $this->borrowed_at = $values["borrowed_at"] ?? time();
+        $this->returned_at = $values["returned_at"] ?? null;
         $this->renewed_times = $values["renewed_times"];
     }
 

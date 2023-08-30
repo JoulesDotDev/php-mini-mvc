@@ -36,8 +36,8 @@ class User
         $this->email = $values["email"];
         $this->name = $values["name"];
         $this->password = $values["password"];
-        $this->verified = $values["verified"];
-        $this->admin = $values["admin"];
+        $this->verified = $values["verified"] ?? false;
+        $this->admin = $values["admin"] ?? false;
     }
 
     public function save()

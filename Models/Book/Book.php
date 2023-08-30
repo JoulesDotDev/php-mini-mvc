@@ -1,9 +1,12 @@
 <?php
 
 require_once ROOT_DIR . "/Models/DB.php";
+require_once "Read.php";
 
 class Books
 {
+    use BookRead;
+
     public $id;
     public $name;
     public $isbn;
@@ -52,7 +55,7 @@ class Books
 
             if (!$result) throw new DBException("Failed to save book");
 
-            $this->id = DB::lastInsertId();
+            return self::_getById(DB::lastInsertId());
         } catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);
         }

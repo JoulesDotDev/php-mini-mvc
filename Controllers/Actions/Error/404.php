@@ -1,1 +1,4 @@
-<h1>404</h1>
+<?php
+
+_CONTEXT_SET("page", ["title" => "Page not found"]);
+View();

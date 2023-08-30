@@ -33,6 +33,7 @@ class Router
             $controller = $this->routeMap[$path]["controller"];
             _CONTEXT_SET("_controller", $controller);
             _CONTEXT_SET("_page", $controller);
+            define("PATH", "/$path");
 
             if (is_dir(self::$routesFolder . $controller)) {
                 $controller .= "/index.php";
@@ -45,7 +46,8 @@ class Router
             }
             require_once self::$routesFolder . $controller;
         } else {
-            require_once self::$routesFolder . "Error/404.php";
+            _FLASH_SET("path", "/$path");
+            redirect("/404");
         }
     }
 }

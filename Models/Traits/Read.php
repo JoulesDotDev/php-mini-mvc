@@ -7,5 +7,6 @@ trait ModelRead
         $stmt = DB::query("SELECT * FROM " . self::table() . "  WHERE id = ?", [$id]);
         $result = $stmt->fetch();
         if (!$result) return null;
+        return $result;
     }
 }
