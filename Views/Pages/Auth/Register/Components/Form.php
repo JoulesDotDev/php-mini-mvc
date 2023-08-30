@@ -3,7 +3,7 @@ $values = _CONTEXT("result", "values") ?? [];
 $errors = _CONTEXT("result", "errors") ?? [];
 ?>
 
-<div class="flex items-center justify-center h-screen">
+<div class="flex items-center justify-center mt-20">
     <form action="/register" method="POST" class="card bg-primary card-compact w-96 bg-base-100 shadow-xl h-min p-8">
         <?= csrf() ?>
         <?= action("auth:register") ?>
