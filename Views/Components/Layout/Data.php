@@ -6,7 +6,12 @@ function navbarLinks()
         "Books" => "/"
     ];
 
-    if (_CONTEXT("user")) $links["Profile"] = "/profile";
+    if (_CONTEXT("user")) {
+        $links["Profile"] = "/profile";
+    } else {
+        $links["Login"] = "/login";
+        $links["Register"] = "/register";
+    }
     if (_CONTEXT("user", "admin")) $links["Admin"] = "/admin";
 
     return $links;
