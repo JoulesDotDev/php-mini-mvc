@@ -11,6 +11,7 @@ class Books
     public $name;
     public $isbn;
     public $author;
+    public $cover;
     public $amount;
     public $borrowable;
     public $borrow_days;
@@ -28,11 +29,12 @@ class Books
         $this->name = $values["name"];
         $this->isbn = $values["isbn"];
         $this->author = $values["author"];
+        $this->cover = $values["cover"] ?? null;
         $this->amount = $values["amount"];
         $this->borrowable = $values["borrowable"];
-        $this->borrow_days = $values["borrow_days"];
-        $this->renewable_times = $values["renewable_times"];
-        $this->overdue_rate = $values["overdue_rate"];
+        $this->borrow_days = $values["borrow_days"] ?? null;
+        $this->renewable_times = $values["renewable_times"] ?? null;
+        $this->overdue_rate = $values["overdue_rate"] ?? null;
     }
 
     public function save()
@@ -40,15 +42,15 @@ class Books
         try {
             $result = DB::query(
                 "INSERT INTO " . self::table() .
-                    " (id, name, isbn, author, amount, borrowable, borrow_days, renewable_times, overdue_rate)" .
-                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)" .
+                    " (id, name, isbn, author, amount, cover, borrowable, borrow_days, renewable_times, overdue_rate)" .
+                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" .
                     " ON DUPLICATE KEY UPDATE" .
                     " id = VALUES(id), name = VALUES(name), isbn = VALUES(isbn)," .
-                    " author = VALUES(author), amount = VALUES(amount), borrowable = VALUES(borrowable)," .
+                    " author = VALUES(author), author = VALUES(author), amount = VALUES(amount), borrowable = VALUES(borrowable)," .
                     " borrow_days = VALUES(borrow_days), renewable_times = VALUES(renewable_times)," .
                     " overdue_rate = VALUES(overdue_rate)",
                 [
-                    $this->id, $this->name, $this->isbn, $this->author, $this->amount,
+                    $this->id, $this->name, $this->isbn, $this->author, $this->cover, $this->amount,
                     $this->borrowable, $this->borrow_days, $this->renewable_times, $this->overdue_rate
                 ]
             );
