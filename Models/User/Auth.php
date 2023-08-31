@@ -14,7 +14,8 @@ trait UserAuth
 
             $jwt = JWT::encode(["id" => $result["id"]]);
             Cookie::set("token", $jwt);
-            hxRedirect("/");
+            if ($result["admin"]) redirect("/admin");
+            else redirect("/");
         } catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);
         }
@@ -48,6 +49,6 @@ trait UserAuth
             JwtModel::blacklist($jwt);
             Cookie::delete("token");
         }
-        hxRedirect("/login");
+        redirect("/login");
     }
 }
