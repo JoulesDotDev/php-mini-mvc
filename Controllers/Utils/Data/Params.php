@@ -10,6 +10,20 @@ function _POST($key)
     return $_POST[$key] ?? null;
 }
 
+function _FILES($key)
+{
+    return $_FILES[$key] ?? null;
+}
+
+function _FILESValues($keys)
+{
+    $values = [];
+    foreach ($keys as $key) {
+        $values[$key] = _FILES($key);
+    }
+    return $values;
+}
+
 function _POSTValues($keys)
 {
     $values = [];

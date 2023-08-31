@@ -40,6 +40,45 @@ class Validation
         return $this;
     }
 
+    public function id($table, $message)
+    {
+        return $this->required()
+            ->integer()
+            ->exists($table, "id", $message);
+    }
+
+    public function integer()
+    {
+        if (filter_var($this->value, FILTER_VALIDATE_INT) === false && !preg_match('/[eE]/', $this->value)) {
+            $this->errors[] = "This field must be an integer";
+        }
+        return $this;
+    }
+
+    public function decimal()
+    {
+        if (filter_var($this->value, FILTER_VALIDATE_FLOAT) === false && !preg_match('/[eE]/', $this->value)) {
+            $this->errors[] = "This field must be a decimal number";
+        }
+        return $this;
+    }
+
+    public function min($val)
+    {
+        if ($this->value < $val) {
+            $this->errors[] = "This field must be at least $val";
+        }
+        return $this;
+    }
+
+    public function max($val)
+    {
+        if ($this->value > $val) {
+            $this->errors[] = "This field must be at most $val";
+        }
+        return $this;
+    }
+
     public function email()
     {
         return $this->required()
@@ -68,6 +107,30 @@ class Validation
     {
         if (!preg_match($pattern, $this->value)) {
             $this->errors[] = $message;
+        }
+        return $this;
+    }
+
+    public function image()
+    {
+        $imageInfo = getimagesize($this->value);
+        $error = "The file is not a valid PNG or JPEG";
+
+        if ($imageInfo === false) {
+            $this->errors[] = $error;
+        }
+
+        if (!in_array($imageInfo[2], [IMAGETYPE_JPEG, IMAGETYPE_PNG])) {
+            $this->errors[] = $error;
+        }
+
+        return $this;
+    }
+
+    public function maxSize($size)
+    {
+        if ($_FILES[$this->field_name]["size"] > $size) {
+            $this->errors[] = "The file is too large";
         }
         return $this;
     }
