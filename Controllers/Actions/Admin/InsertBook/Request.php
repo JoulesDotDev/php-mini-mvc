@@ -24,6 +24,7 @@ function validate()
     $validator->validate($v, "author")->required()->name()->done();
     if (!is_null($v["cover"])) {
         $validator->validate($f, "cover")->image()->maxSize(1024 * 500)->done();
+        $v["cover"] = file_get_contents($f["cover"]['tmp_name']);
     }
     $validator->validate($v, "amount")->required()->integer()->min(0)->done();
     if (!is_null($v["borrowable"])) {
