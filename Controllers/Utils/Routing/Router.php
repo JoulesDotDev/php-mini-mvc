@@ -33,6 +33,7 @@ class Router
             $controller = $this->routeMap[$path]["controller"];
             _CONTEXT_SET("_controller", $controller);
             _CONTEXT_SET("_page", $controller);
+            _CONTEXT_SET("_ajax", isset($_SERVER['HTTP_X_HTMX']));
             define("PATH", "/$path");
 
             if (is_dir(self::$routesFolder . $controller)) {
