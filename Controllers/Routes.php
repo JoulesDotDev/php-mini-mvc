@@ -22,4 +22,7 @@ Routing::routes([
 ])->middleware(["NoAuth"]);
 
 Routing::routes(["profile" => "Profile"])->middleware(["Auth"]);
-//Routing::routes(["admin" => "Admin"])->middleware(["Auth", "Admin"]);
+Routing::routes([
+    "admin" => "Admin",
+    "admin/book/insert" => "Admin/InsertBook"
+])->middleware(["Auth", "Admin"]);
