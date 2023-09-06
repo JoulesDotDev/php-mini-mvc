@@ -7,7 +7,7 @@ if (GET) show();
 function show()
 {
     $option = _GET("manage");
-    if (_CONTEXT("_ajax")) {
+    if (HTMX) {
         if ($option === "books") return Component("BookOptions");
         if ($option === "cards") return Component("CardOptions");
     }
