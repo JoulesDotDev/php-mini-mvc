@@ -6,7 +6,6 @@
     <script src="https://unpkg.com/htmx.org@1.9.4" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/morph@3.x.x/dist/cdn.min.js"></script>
 
     <script src="//<?= BASE_URL ?>/static/scripts/main.js"></script>
 
