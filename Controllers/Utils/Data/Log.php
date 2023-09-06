@@ -8,7 +8,7 @@ class Log
 
     static $hiddenParams = ["password", "verify_password", "csrf_token", "token"];
 
-    public static function Error(Exception $e)
+    public static function Error(Exception | Error $e)
     {
         self::Log(get_class($e) . " " . $e->getMessage(), "error");
     }
