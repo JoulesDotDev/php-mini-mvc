@@ -14,6 +14,8 @@
     <link href="//<?= BASE_URL ?>/static/css/main.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body id="#body" hx-boost="true">
+<body id="#body" hx-boost="true" hx-indicator=".htmx-progress">
     <?php Component("/Layout/Navbar"); ?>
-    <div class="container mx-auto p-6">
+    <div class="page relative">
+        <progress class="progress htmx-progress progress-success opacity-0 h-1 rounded-none w-full absolute"></progress>
+        <div class="container mx-auto p-6">
