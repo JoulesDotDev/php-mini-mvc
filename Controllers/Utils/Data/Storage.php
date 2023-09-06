@@ -45,7 +45,6 @@ class Storage
             return null;
         }
         unlink($file_path);
-        var_dump($path);
         rmdir($path);
         return $name;
     }
