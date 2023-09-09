@@ -49,7 +49,7 @@ function insertBook()
         return View();
     } catch (DBException $e) {
         Log::Error($e);
-        //redirect("/500");
+        redirect("/500");
     }
 }
 
