@@ -1,6 +1,6 @@
 <?php
 
-_CONTEXT_SET("page", ["title" => "Logout"]);
+_CONTEXT_SET("head", ["title" => "Logout"]);
 
 if (POST) actions();
 else JSON(405, 405);

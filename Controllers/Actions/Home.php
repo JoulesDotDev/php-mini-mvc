@@ -1,6 +1,6 @@
 <?php
 
-_CONTEXT_SET("page", ["title" => "Home"]);
+_CONTEXT_SET("head", ["title" => "Home"]);
 
 if (GET) show();
 

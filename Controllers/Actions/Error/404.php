@@ -1,4 +1,4 @@
 <?php
 
-_CONTEXT_SET("page", ["title" => "Page not found"]);
+_CONTEXT_SET("head", ["title" => "Page not found"]);
 View();

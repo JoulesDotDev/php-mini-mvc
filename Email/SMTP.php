@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require ROOT_DIR . '/Vendor/PHPMailer/src/Exception.php';
-require ROOT_DIR . '/Vendor/PHPMailer/src/PHPMailer.php';
-require ROOT_DIR . '/Vendor/PHPMailer/src/SMTP.php';
+require ROOT_DIR . "/Vendor/PHPMailer/src/Exception.php";
+require ROOT_DIR . "/Vendor/PHPMailer/src/PHPMailer.php";
+require ROOT_DIR . "/Vendor/PHPMailer/src/SMTP.php";
 
 class SMTP
 {

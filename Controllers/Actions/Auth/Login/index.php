@@ -1,6 +1,6 @@
 <?php
 
-_CONTEXT_SET("page", ["title" => "Login"]);
+_CONTEXT_SET("head", ["title" => "Login"]);
 
 if (GET) show();
 if (POST) actions();

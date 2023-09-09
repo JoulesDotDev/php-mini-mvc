@@ -1,6 +1,6 @@
 <?php
 
-_CONTEXT_SET("page", ["title" => "Save Book"]);
+_CONTEXT_SET("head", ["title" => "Save Book"]);
 
 if (GET) show();
 if (POST) actions();

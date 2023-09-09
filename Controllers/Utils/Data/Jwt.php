@@ -51,8 +51,8 @@ class JWT
 function base64UrlEncode($text)
 {
     return str_replace(
-        ['+', '/', '='],
-        ['-', '_', ''],
+        ["+", "/", "="],
+        ["-", "_", ""],
         base64_encode($text)
     );
 }
@@ -61,8 +61,8 @@ function base64UrlDecode($text)
 {
     return base64_decode(
         str_replace(
-            ['-', '_'],
-            ['+', '/'],
+            ["-", "_"],
+            ["+", "/"],
             $text
         )
     );

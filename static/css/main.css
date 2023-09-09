@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;700&display=swap");
 
 html,
 body {
-    font-family: 'Lexend Deca', sans-serif;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .htmx-progress {

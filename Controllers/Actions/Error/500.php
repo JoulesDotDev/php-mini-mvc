@@ -1,4 +1,4 @@
 <?php
 
-_CONTEXT_SET("page", ["title" => "Terrible Error"]);
+_CONTEXT_SET("head", ["title" => "Terrible Error"]);
 View();

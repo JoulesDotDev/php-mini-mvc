@@ -2,7 +2,7 @@
 <html data-theme="business">
 
 <head>
-    <title><?= _CONTEXT("page", "title") ?></title>
+    <title><?= _CONTEXT("head", "title") ?></title>
     <script src="https://unpkg.com/htmx.org@1.9.4" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>

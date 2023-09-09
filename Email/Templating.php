@@ -4,7 +4,7 @@ class Template
 {
     private static function get($name)
     {
-        $file = ROOT_DIR . '/Email/Templates/' . $name . '.html';
+        $file = ROOT_DIR . "/Email/Templates/" . $name . ".html";
         if (file_exists($file)) {
             return file_get_contents($file);
         }
@@ -19,7 +19,7 @@ class Template
         }
 
         foreach ($data as $key => $value) {
-            $content = str_replace('{{' . $key . '}}', $value, $content);
+            $content = str_replace("{{" . $key . "}}", $value, $content);
         }
 
         return $content;

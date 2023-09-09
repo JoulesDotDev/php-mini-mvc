@@ -1,6 +1,6 @@
 <?php
 
-_CONTEXT_SET("page", ["title" => "Email Verification"]);
+_CONTEXT_SET("head", ["title" => "Email Verification"]);
 
 if (POST) actions();
 else JSON(405, 405);
