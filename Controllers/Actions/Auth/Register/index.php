@@ -1,6 +1,6 @@
 <?php
 
-_CONTEXT_SET("head", ["title" => "Register"]);
+_CONTEXT_SET("_head", ["title" => "Register"]);
 
 if (GET) show();
 else if (POST) actions();

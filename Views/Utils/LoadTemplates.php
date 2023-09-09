@@ -2,7 +2,7 @@
 
 function Component($path, $data = null, $page = null)
 {
-    if (!$page) $page = _CONTEXT("_page");
+    if (!$page) $page = _CONTEXT("__page");
     $component = ROOT_DIR . "/Views/Pages/$page/Components/$path.php";
 
     if (!is_file($component) || $path[0] === "/") {
@@ -15,8 +15,8 @@ function Component($path, $data = null, $page = null)
 
 function View($path = null)
 {
-    if (!$path) $path = _CONTEXT("_controller");
-    _CONTEXT_SET("_page", $path);
+    if (!$path) $path = _CONTEXT("__controller");
+    _CONTEXT_SET("__page", $path);
 
     $page = ROOT_DIR . "/Views/Pages/$path";
     if (is_dir($page)) {
@@ -25,7 +25,7 @@ function View($path = null)
         $page .= ".php";
     }
 
-    Component("/Layout/BaseHeader");
+    Component(_CONTEXT("_layout", "header") ?? "/Layout/BaseHeader");
     require_once $page;
-    Component("/Layout/BaseFooter");
+    Component(_CONTEXT("_layout", "footer") ?? "/Layout/BaseFooter");
 }

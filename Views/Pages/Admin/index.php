@@ -19,5 +19,5 @@ $cards = [
 <h1 class="text-5xl font-bold text-center mt-20">Admin</h1>
 
 <div id="action-options" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-20">
-    <?php Component("Cards", ["cards" => $cards, "ajax" => true]); ?>
+    <?php Component("Cards", ["cards" => $cards, "ajax" => true]) ?>
 </div>

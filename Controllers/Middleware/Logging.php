@@ -1,3 +1,3 @@
 <?php
 
-Log::Info("Executing " . _CONTEXT("_controller"));
+Log::Info("Executing " . _CONTEXT("__controller"));

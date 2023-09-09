@@ -1,6 +1,6 @@
 <?php
 
-_CONTEXT_SET("head", ["title" => "Profile"]);
+_CONTEXT_SET("_head", ["title" => "Profile"]);
 
 if (GET) show();
 else JSON(404, 404);

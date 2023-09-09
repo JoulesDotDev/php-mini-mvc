@@ -1,6 +1,6 @@
 <?php
 
-_CONTEXT_SET("head", ["title" => "Admin"]);
+_CONTEXT_SET("_head", ["title" => "Admin"]);
 
 if (GET) show();
 

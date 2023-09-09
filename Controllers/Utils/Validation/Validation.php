@@ -40,6 +40,15 @@ class Validation
         return $this;
     }
 
+    public function lengths($lengths, $name = "This field")
+    {
+        if (!in_array(strlen($this->value), $lengths)) {
+            $this->errors[] = "$name must be " . implode(" or ", $lengths) . " characters long";
+        }
+
+        return $this;
+    }
+
     public function id($table, $message)
     {
         return $this->required()

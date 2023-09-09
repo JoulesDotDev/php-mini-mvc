@@ -31,8 +31,8 @@ class Router
 
         if (key_exists($path, $this->routeMap)) {
             $controller = $this->routeMap[$path]["controller"];
-            _CONTEXT_SET("_controller", $controller);
-            _CONTEXT_SET("_page", $controller);
+            _CONTEXT_SET("__controller", $controller);
+            _CONTEXT_SET("__page", $controller);
             define("HTMX", isset($_SERVER["HTTP_X_HTMX"]));
             define("PATH", "/$path");
 

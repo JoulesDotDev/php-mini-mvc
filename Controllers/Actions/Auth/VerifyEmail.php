@@ -1,6 +1,6 @@
 <?php
 
-_CONTEXT_SET("head", ["title" => "Email Verification"]);
+_CONTEXT_SET("_head", ["title" => "Email Verification"]);
 
 if (GET) show();
 else JSON(405, 405);

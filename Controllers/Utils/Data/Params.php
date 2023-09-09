@@ -15,7 +15,7 @@ function _FILES($key)
     return $_FILES[$key] ?? null;
 }
 
-function _FILESValues($keys)
+function _FILEValues($keys)
 {
     $values = [];
     foreach ($keys as $key) {

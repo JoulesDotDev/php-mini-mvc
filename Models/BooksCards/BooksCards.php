@@ -29,11 +29,11 @@ class BooksCards
         try {
             $result = DB::query(
                 "INSERT INTO " . self::table() .
-                    " (id, name, isbn, author, amount)" .
+                    " (book_id, card_id, borrowed_at, returned_at, renewed_times)" .
                     " VALUES (?, ?, ?, ?, ?)" .
                     " ON DUPLICATE KEY UPDATE" .
-                    " id = VALUES(id), name = VALUES(name), isbn = VALUES(isbn)," .
-                    " author = VALUES(author), amount = VALUES(amount)",
+                    " book_id = VALUES(book_id), card_id = VALUES(card_id), borrowed_at = VALUES(borrowed_at)," .
+                    " returned_at = VALUES(returned_at), renewed_times = VALUES(renewed_times)",
                 [$this->book_id, $this->card_id, $this->borrowed_at, $this->returned_at, $this->renewed_times]
             );
 
