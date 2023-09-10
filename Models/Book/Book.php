@@ -14,9 +14,9 @@ class Book
     public $cover;
     public $amount;
     public $borrowable;
-    public $borrow_days;
-    public $renewable_times;
-    public $overdue_rate;
+    public $borrow_days = null;
+    public $renewable_times = null;
+    public $overdue_rate = null;
 
     public static function table()
     {
@@ -30,11 +30,13 @@ class Book
         $this->isbn = $values["isbn"];
         $this->author_id = $values["author_id"];
         $this->cover = $values["cover"] ?? null;
-        $this->amount = intval($values["amount"]);
+        $this->amount = $values["amount"];
         $this->borrowable = $values["borrowable"];
-        $this->borrow_days = $values["borrow_days"] ?? null;
-        $this->renewable_times = $values["renewable_times"] ?? null;
-        $this->overdue_rate = $values["overdue_rate"] ?? null;
+        if ($this->borrowable) {
+            $this->borrow_days = $values["borrow_days"];
+            $this->renewable_times = $values["renewable_times"];
+            $this->overdue_rate = $values["overdue_rate"];
+        }
     }
 
     public function save()

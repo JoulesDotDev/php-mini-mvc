@@ -122,7 +122,7 @@ class Validation
 
     public function image()
     {
-        $imageInfo = getimagesize($this->value);
+        $imageInfo = getimagesize($this->value['tmp_name']);
         $error = "The file is not a valid PNG or JPEG";
 
         if ($imageInfo === false) {

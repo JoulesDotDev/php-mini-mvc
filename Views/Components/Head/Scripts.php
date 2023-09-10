@@ -1,9 +1,11 @@
 <!-- HTMX -->
 <script src="https://unpkg.com/htmx.org@1.9.4" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/htmx.org/dist/ext/head-support.js"></script>
+<script src="https://unpkg.com/htmx.org/dist/ext/alpine-morph.js"></script>
 <!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.tailwindcss.com"></script>
 <!-- Alpine JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/morph@3.x.x/dist/cdn.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <!-- Custom Scripts -->

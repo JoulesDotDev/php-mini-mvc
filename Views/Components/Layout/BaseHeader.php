@@ -11,7 +11,7 @@
     <?php Component("/Head/Styles") ?>
 </head>
 
-<body id="#body" hx-boost="true" hx-indicator=".htmx-progress" hx-ext="head-support">
+<body id="#body" hx-boost="true" hx-indicator=".htmx-progress" hx-ext="head-support, alpine-morph">
     <?php Component("/Layout/Navbar") ?>
     <div class="page relative">
         <progress class="progress htmx-progress progress-success opacity-0 h-1 rounded-none w-full absolute"></progress>

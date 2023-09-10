@@ -8,7 +8,7 @@ function validate()
 {
     $v = _POSTValues(
         [
-            "id", "name", "isbn", "author_id", "amount", "borrowable",
+            "id", "name", "isbn", "author_id", "amount", "cover", "borrowable",
             "borrow_days", "renewable_times", "overdue_rate"
         ]
     );

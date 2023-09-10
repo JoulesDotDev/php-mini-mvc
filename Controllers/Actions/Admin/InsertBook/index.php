@@ -1,6 +1,6 @@
 <?php
 
-_CONTEXT_SET("_head", ["title" => "Save Book"]);
+_CONTEXT_SET("_head", ["title" => "Save Book", "scripts" => ["image-preview"]]);
 
 if (GET) show();
 if (POST) actions();
@@ -40,6 +40,12 @@ function insertBook()
 
         if (count($result["errors"]) === 0) {
             $book = new Book();
+            $cover = $result["values"]["cover"] ?? null;
+            if ($cover) {
+                $extension = getimagesize(_FILES("cover")['tmp_name'])[2] === IMAGETYPE_JPEG ? "jpg" : "png";
+                $name = Storage::save("BookCover", $cover, $book->id . "_cover.$extension");
+                $result["values"]["cover"] = $name;
+            }
             $book->fill($result["values"]);
             $book->save();
         }
