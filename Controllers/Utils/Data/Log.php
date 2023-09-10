@@ -18,9 +18,9 @@ class Log
         self::Log(json_encode($message, JSON_PRETTY_PRINT), "info");
     }
 
-    private static function filteredPost()
+    private static function filteredRequestData($data)
     {
-        $filtered = $_POST;
+        $filtered = $data;
         foreach (self::$hiddenParams as $param) {
             if (key_exists($param, $filtered)) {
                 $filtered[$param] = "********";
@@ -51,10 +51,10 @@ class Log
         $log .= ACTION ? "ACTION: " . ACTION . PHP_EOL : "";
 
         $log .= empty($_POST) ? "" : str_repeat("- ", 25) . PHP_EOL;
-        $log .= empty($_POST) ? "" : "POST: " . json_encode(self::filteredPost(), JSON_PRETTY_PRINT) . PHP_EOL;
+        $log .= empty($_POST) ? "" : "POST: " . json_encode(self::filteredRequestData($_POST), JSON_PRETTY_PRINT) . PHP_EOL;
 
         $log .= empty($_GET) ? "" : str_repeat("- ", 25) . PHP_EOL;
-        $log .= empty($_GET) ? "" : "GET: " . json_encode($_GET, JSON_PRETTY_PRINT) . PHP_EOL;
+        $log .= empty($_GET) ? "" : "POST: " . json_encode(self::filteredRequestData($_GET), JSON_PRETTY_PRINT) . PHP_EOL;
 
         $log .= $message ? str_repeat("- ", 25) . PHP_EOL : "";
         $log .= $message ? "Message: $message" . PHP_EOL : "";

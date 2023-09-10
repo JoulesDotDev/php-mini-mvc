@@ -20,10 +20,8 @@
 - Easy to load views and components
 
 ## Roadmap
-- Better 404 Page
-- Better 500 error handling
-- Rate limiting
-- HTMX + AlpineJS + TailwindCSS Branch
+- Rate limiting (optional)
+- HTMX + AlpineJS + TailwindCSS (+daisyui) Branch
 - ORM Branch
 
 # Docs
