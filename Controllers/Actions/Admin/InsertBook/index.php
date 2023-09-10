@@ -38,13 +38,11 @@ function insertBook()
         }
         _CONTEXT_SET("authors", $author ? [$author] : []);
 
-        if (count($result["errors"]) > 0) {
-            return View();
+        if (count($result["errors"]) === 0) {
+            $book = new Book();
+            $book->fill($result["values"]);
+            $book->save();
         }
-
-        $book = new Book();
-        $book->fill($result["values"]);
-        $book->save();
 
         return View();
     } catch (DBException $e) {

@@ -23,20 +23,18 @@ function register()
 
     try {
         $result = validate();
+        _CONTEXT_SET("result", $result);
 
-        if (count($result["errors"]) > 0) {
-            _CONTEXT_SET("result", $result);
-            return View();
+        if (count($result["errors"]) === 0) {
+            $user = new User();
+            $result["values"]["password"] = HashPassword($result["values"]["password"]);
+            $user->fill($result["values"]);
+            $user->save();
+            EmailVerification::send($user);
+
+            _CONTEXT_SET("registered", true);
+            _CONTEXT_SET("email", $user->email);
         }
-
-        $user = new User();
-        $result["values"]["password"] = HashPassword($result["values"]["password"]);
-        $user->fill($result["values"]);
-        $user->save();
-        EmailVerification::send($user);
-
-        _CONTEXT_SET("registered", true);
-        _CONTEXT_SET("email", $user->email);
 
         return View();
     } catch (DBException | EmailException $e) {
